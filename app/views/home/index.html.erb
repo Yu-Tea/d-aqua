@@ -1,7 +1,36 @@
-<div class="bg-light"></div>
-  <div class="p-10">
-    <div class="text-right">
-      <button class="aqua-button">ズカン：30/215</button>
-      <button class="aqua-button">☰</button>
+<header data-controller="menu" class="flex justify-end items-center gap-3 p-6">
+  <button type="button" class="aqua-button main-font"><i class="fa-solid fa-book-bookmark mr-2"></i>図鑑：30/215</button>
+  <button type="button" class="aqua-button" data-action="click->menu#toggle">
+    <i class="fa-solid fa-bars  fa-lg"></i>
+  </button>
+  
+  <nav class="nav_left line-hover" data-menu-target="panel" data-action="click->menu#close">
+    <div class="nav_right" data-action="click->menu#stop">
+      <button type="button"
+        class="close-button"
+        data-action="click->menu#close">
+        <i class="fa-solid fa-xmark fa-lg"></i>
+      </button>
+      <div class="nav-menu">
+        <ul class="main-font line-hover-menu text-xl sm:text-2xl">
+          <li><a href="#"><i class="fa-solid fa-user mr-2"></i>ユーザー登録</a></li>
+          <li><a href="#"><i class="fa-solid fa-right-to-bracket mr-2"></i>ログイン</a></li>
+          <li><a href="#"><i class="fa-solid fa-fish-fins mr-2"></i>遊び方</a></li>
+          <li><a href="#"><i class="fa-solid fa-pencil mr-2"></i>ソウゾウ</a></li>
+          <li><a href="#"><i class="fa-solid fa-file-circle-check mr-2"></i>利用規約</a></li>
+          <li><a href="#"><i class="fa-solid fa-shield-halved mr-2"></i>プライバシーポリシー</a></li>
+          <li><a href="#"><i class="fa-solid fa-right-from-bracket mr-2"></i>ログアウト</a></li>
+        </ul>
+        <p class="mt-10">ロゴ画像</p>
+        <p class="mt-5 text-xs">© 2025 DAYDREAM AQUALIUM</p>
+        <div class="flex mt-3">
+          <a href="#"><i class="fa-brands fa-square-x-twitter fa-2x"></i></a>
+          <a href="#"><i class="fa-brands fa-github fa-2x"></i></a>
+        </div>
+      </div>
     </div>
-  </div>
+  </nav>
+</header>
+
+
+<div class="bg-light"></div>

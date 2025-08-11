@@ -1,51 +1,120 @@
-body {
-  margin: 0;
-  background: url("bg_floor.png"), url("bg_sea.png");
-  background-repeat: no-repeat, no-repeat;
-  background-position: right bottom, left top;
-  background-attachment: fixed, fixed;
-  background-size: cover, cover;
-}
-
-.bg-light {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: url("bg_light.png") left top no-repeat;
-  background-size: cover;
-  opacity: 0.3;
-  animation: lightPulse 4s ease-in-out infinite;
-  pointer-events: none;
-  z-index: -1;
-}
-
-/* 光のアニメーション */
-@keyframes lightPulse {
-  0%,
-  100% {
-    opacity: 0.3;
-  }
-  50% {
-    opacity: 0.8;
-  }
-}
-
+/* メインボタン */
 .aqua-button {
   display: inline-block;
   position: relative;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
-  padding: 0.6em 0.8em;
+  padding: 0.6em;
   border: 2px solid #fff;
   border-radius: 8px;
-  background-color: #7186b987;
+  background-color: rgba(108, 146, 192, 0.497);
   color: #fff;
   font-size: 1.2em;
 }
 
-aqua-button:hover {
-  background-color: #7187b9bb;
+.aqua-button:hover {
+  background-color: rgba(89, 129, 182, 0.7);
+}
+
+/* メニュー用の設定 */
+.nav_left {
+  background-color: rgba(236, 240, 244, 0.4);
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: flex-end;
+  z-index: 5;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* 背景フェードイン */
+.nav_left.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* 右側メニュー本体 */
+.nav_right {
+  background-color: #fff;
+  width: 100%;
+  max-width: 360px;
+  transform: translateX(100%);
+  transition: transform 0.4s ease;
+  padding: 35px;
+  color: #7c99b7;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+}
+
+/* スライドイン */
+.nav_left.active .nav_right {
+  transform: translateX(0);
+}
+
+.close-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #4d77a4;
+  border: 2px solid #4d77a4;
+  padding: 0.2em;
+  border-radius: 8px;
+}
+
+.close-button:hover {
+  color: #ffffff;
+  background-color: #4d77a4;
+}
+
+nav a {
+  color: #4d77a4;
+  text-decoration: none;
+}
+
+nav a:hover {
+  color: #64a5ce;
+}
+
+nav ul {
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+}
+nav ul li a {
+  display: block;
+  padding: 14px 0;
+}
+
+.line-hover .line-hover-menu a {
+  position: relative;
+}
+.line-hover .line-hover-menu a::after {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  display: block;
+  content: "";
+  width: 0%;
+  height: 2px;
+  background: #64a5ce;
+  transition: all 0.2s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+}
+.line-hover .line-hover-menu a:hover::after {
+  width: 100%;
+}
+
+.nav-menu {
+  display: flex;
+  flex-direction: column;
 }
