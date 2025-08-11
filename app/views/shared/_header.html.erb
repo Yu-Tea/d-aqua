@@ -1,0 +1,60 @@
+<header data-controller="menu" class="fixed top-0 left-0 right-0 z-20 flex justify-end items-center gap-3 p-6">
+  <% if current_page?(root_path) %>
+    <button type="button" class="aqua-button main-font">
+      <i class="fa-solid fa-book-bookmark mr-2"></i>図鑑：30/215
+    </button>
+  <% end %>
+  <button type="button" class="aqua-button" data-action="click->menu#toggle">
+    <i class="fa-solid fa-bars  fa-lg"></i>
+  </button>
+  
+  <nav class="nav_left line-hover" data-menu-target="panel" data-action="click->menu#close">
+    <div class="nav_right" data-action="click->menu#stop">
+      <button type="button"
+        class="close-button"
+        data-action="click->menu#close">
+        <i class="fa-solid fa-xmark fa-lg"></i>
+      </button>
+      <div class="nav-menu">
+        <ul class="main-font line-hover-menu text-xl sm:text-2xl">
+          <% if logged_in? %>
+            <% menu_items = [
+              { icon: "fa-solid fa-fish-fins", label_key: "header.top", path: root_path },
+              { icon: "fa-solid fa-face-smile", label_key: "header.mypage", path: "#" },
+              { icon: "fa-solid fa-disease", label_key: "header.how_to_play", path: "#" },
+              { icon: "fa-solid fa-pencil", label_key: "header.create", path: "#" },
+              { icon: "fa-solid fa-file-circle-check", label_key: "header.terms", path: "#" },
+              { icon: "fa-solid fa-shield-halved", label_key: "header.privacy", path: "#" },
+              { icon: "fa-solid fa-right-from-bracket", label_key: "header.logout", path: "#" }
+            ] %>
+          <% else %>
+            <% menu_items = [
+              { icon: "fa-solid fa-user", label_key: "header.register", path: new_user_path },
+              { icon: "fa-solid fa-right-to-bracket", label_key: "header.login", path: login_path },
+              { icon: "fa-solid fa-fish-fins", label_key: "header.top", path: root_path },
+              { icon: "fa-solid fa-disease", label_key: "header.how_to_play", path: "#" },
+              { icon: "fa-solid fa-pencil", label_key: "header.create", path: "#" },
+              { icon: "fa-solid fa-file-circle-check", label_key: "header.terms", path: "#" },
+              { icon: "fa-solid fa-shield-halved", label_key: "header.privacy", path: "#" }
+            ] %>
+          <% end %>
+
+          <% menu_items.each do |item| %>
+            <% next if current_page?(item[:path]) %>
+            <li>
+              <%= link_to item[:path] do %>
+                <i class="<%= item[:icon] %> mr-2"></i><%= t(item[:label_key]) %>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+        <p class="mt-10">ロゴ画像</p>
+        <p class="mt-5 text-xs">© 2025 DAYDREAM AQUARIUM</p>
+        <div class="flex mt-3">
+          <a href="#"><i class="fa-brands fa-square-x-twitter fa-2x"></i></a>
+          <a href="#"><i class="fa-brands fa-github fa-2x"></i></a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>

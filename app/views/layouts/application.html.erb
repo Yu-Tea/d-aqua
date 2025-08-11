@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "DAYDREAM AQUALIUM" %></title>
+    <title><%= content_for(:title) || "DAYDREAM AQUARIUM" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -22,6 +22,8 @@
   </head>
 
   <body>
+    <%= render 'shared/header' %>
     <%= yield %>
+    <div class="bg-light"></div>
   </body>
 </html>

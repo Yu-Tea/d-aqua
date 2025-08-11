@@ -60,3 +60,5 @@ gem "tailwindcss-rails"
 gem "tailwindcss-ruby", "3.4.17"
 
 gem "sassc-rails"
+gem "sorcery"
+gem 'rails-i18n', '~> 7.0.0'

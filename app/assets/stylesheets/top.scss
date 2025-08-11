@@ -24,7 +24,7 @@
   left: 0;
   display: flex;
   justify-content: flex-end;
-  z-index: 5;
+  z-index: 10;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.4s ease;
@@ -51,6 +51,7 @@
   flex-direction: column;
   justify-content: center;
   height: 100vh;
+  z-index: 10;
 }
 
 /* スライドイン */
@@ -117,4 +118,28 @@ nav ul li a {
 .nav-menu {
   display: flex;
   flex-direction: column;
+}
+
+.bg_subpage {
+  background-color: rgba(236, 240, 244, 0.7);
+  width: 70%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: flex-end;
+  z-index: 5;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 50px 0;
+}
+
+@media (max-width: 640px) {
+  .bg_subpage {
+    width: 100%;
+    left: 0;
+    transform: none;
+  }
 }
