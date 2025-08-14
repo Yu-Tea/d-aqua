@@ -25,7 +25,12 @@
               { icon: "fa-solid fa-pencil", label_key: "header.create", path: "#" },
               { icon: "fa-solid fa-file-circle-check", label_key: "header.terms", path: "#" },
               { icon: "fa-solid fa-shield-halved", label_key: "header.privacy", path: "#" },
-              { icon: "fa-solid fa-right-from-bracket", label_key: "header.logout", path: "#" }
+              { 
+                icon: "fa-solid fa-right-from-bracket", 
+                label_key: "header.logout", 
+                path: logout_path, 
+                method: :delete 
+              }
             ] %>
           <% else %>
             <% menu_items = [
@@ -42,8 +47,14 @@
           <% menu_items.each do |item| %>
             <% next if current_page?(item[:path]) %>
             <li>
-              <%= link_to item[:path] do %>
-                <i class="<%= item[:icon] %> mr-2"></i><%= t(item[:label_key]) %>
+              <% if item[:method] %>
+                <%= link_to item[:path], data: { turbo_method: item[:method] } do %>
+                  <i class="<%= item[:icon] %> mr-2"></i><%= t(item[:label_key]) %>
+                <% end %>
+              <% else %>
+                <%= link_to item[:path] do %>
+                  <i class="<%= item[:icon] %> mr-2"></i><%= t(item[:label_key]) %>
+                <% end %>
               <% end %>
             </li>
           <% end %>

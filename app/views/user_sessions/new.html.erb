@@ -1,6 +1,7 @@
 <div class="container mx-auto h-screen">
   <div class="bg_subpage">
     <div class="mx-auto px-8">
+      <%= render 'shared/flash_message' %>
       <h1><%= t('.title') %></h1>
       <%= form_with url: login_path do |f| %>
         <div class="mb-3">
