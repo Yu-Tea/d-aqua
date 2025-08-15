@@ -4,6 +4,7 @@
       <%= render 'shared/flash_message' %>
       <h1><%= t('.title') %></h1>
       <%= form_with model: @user do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
         <div class="mb-4">
           <%= f.label :name, class: "block text-gray-700 mb-1" %>
           <%= f.text_field :name, class: "appearance-none border rounded-md w-full py-2 px-4 text-gray-700 leading-tight focus:border-blue-400 focus:outline-none" %>

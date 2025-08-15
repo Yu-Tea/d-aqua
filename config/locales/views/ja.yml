@@ -1,4 +1,9 @@
 ja:
+  defaults:
+    flash_message:
+      created: "イキモノをソウゾウしました"
+      not_created: "%イキモノをソウゾウ出来ませんでした"
+      require_login: ログインしてください
   helpers:
     submit:
       create: 登録
@@ -45,3 +50,8 @@ ja:
     create:
       success: ユーザー登録が完了しました
       failure: ユーザー登録に失敗しました
+  creatures:
+    index:
+      title: ソウゾウ
+    new:
+      title: ソウゾウタイム

@@ -2,9 +2,21 @@ ja:
   activerecord:
     models:
       user: ユーザー
+      creature: 生き物
     attributes:
       user:
         email: メールアドレス
-        name: 名前
+        name: ユーザー名
         password: パスワード
         password_confirmation: パスワード確認
+      creature:
+        name: 名前
+        description: 説明文
+        movement: 動き
+        swim: すいすい
+        float: ぷかぷか
+        rest: ちょこん
+        size: サイズ
+        small: 小さい
+        medium: 普通
+        large: 大きい

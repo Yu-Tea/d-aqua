@@ -1,0 +1,22 @@
+<div class="container mx-auto h-screen">
+  <div class="bg_subpage">
+    <div class="mx-auto px-8 w-full max-w-lg">
+      <h1><%= t('.title') %></h1>
+      <p>生き物をソウゾウしてアクアリウムで泳がせよう。</p>
+      <%= link_to "ソウゾウする", new_creature_path, class: "aqua-button" %>
+      <br><br>
+      <% if @creatures.present? %>
+        <p>アナタがソウゾウした生き物の一覧です。</p>
+        <div class="grid grid-cols-4 gap-4 sm:grid-cols-5">
+          <% @creatures.each do |creature| %>
+            <%= link_to creature_path(creature), class: "cre-button" do %>
+              <div class="creature-preview">
+                <%= raw creature.svg_content %>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

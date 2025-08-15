@@ -1,0 +1,38 @@
+.cre-button {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  background: rgb(83, 140, 183);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    text-decoration: none;
+  }
+}
+
+.creature-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+
+  svg {
+    width: 60% !important;
+    height: 60% !important;
+    // viewBoxがある場合の対応
+    display: block;
+  }
+}
+
+// new.htmlページ用
+.draw-box {
+  svg {
+    background-color: #5a8bbc;
+    cursor: crosshair;
+  }
+}
