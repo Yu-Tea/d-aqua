@@ -1,7 +1,7 @@
 class Creature < ApplicationRecord
   belongs_to :user
   
-  validates :name, presence: true, length: { maximum: 15 }
+  validates :name, presence: true, length: { maximum: 10 }
   validates :description, length: { maximum: 200 }
   validates :movement, presence: true
   validates :size, presence: true
@@ -13,13 +13,18 @@ class Creature < ApplicationRecord
 
   # uuidの短縮
   def short_uuid
-    Base64.urlsafe_encode64([uuid.delete('-')].pack("H*")).tr('=', '')
+    Base64.urlsafe_encode64([id.delete('-')].pack("H*")).tr('=', '')
   end
 
   # 短縮uuidから検索
   def self.find_by_short_uuid(short_uuid)
     decode_uuid = Base64.urlsafe_decode64(short_uuid).unpack1("H*").insert(8, '-').insert(13, '-').insert(18, '-').insert(23, '-')
-    find_by(uuid: decode_uuid)
+    find_by(id: decode_uuid)
+  end
+
+  # Railsがパラメータに使用する値を指定
+  def to_param
+    short_uuid
   end
 
   # SVGデータを取得するメソッド

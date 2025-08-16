@@ -10,7 +10,7 @@ class CreaturesController < ApplicationController
   end
 
   def show
-    @creature = Creature.find(params[:id])
+    @creature = Creature.find_by_short_uuid(params[:id])
   end
 
   def create
@@ -21,6 +21,12 @@ class CreaturesController < ApplicationController
       flash.now[:danger] = t('defaults.flash_message.not_created', item: Creature.model_name.human)
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    creature = current_user.creatures.find_by_short_uuid(params[:id])
+    creature.destroy!
+    redirect_to creatures_path, success: t('defaults.flash_message.deleted', item: Creature.model_name.human), status: :see_other
   end
 
   private

@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_08_14_075314) do
+ActiveRecord::Schema[7.2].define(version: 2025_08_16_102757) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "books", force: :cascade do |t|
+    t.bigint "user_id"
+    t.uuid "creature_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["creature_id"], name: "index_books_on_creature_id"
+    t.index ["user_id", "creature_id"], name: "index_books_on_user_id_and_creature_id", unique: true
+    t.index ["user_id"], name: "index_books_on_user_id"
+  end
 
   create_table "creatures", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -36,5 +46,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_08_14_075314) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "books", "creatures"
+  add_foreign_key "books", "users"
   add_foreign_key "creatures", "users"
 end

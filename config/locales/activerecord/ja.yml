@@ -20,3 +20,13 @@ ja:
         small: 小さい
         medium: 普通
         large: 大きい
+  enums:
+    creature:
+      movement:
+        swim: すいすい
+        float: ぷかぷか
+        rest: ちょこん
+      size:
+        small: 小さい
+        medium: 普通
+        large: 大きい

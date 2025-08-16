@@ -2,7 +2,25 @@
   <div class="bg_subpage">
     <div class="mx-auto px-8 w-full max-w-lg">
       <h1><%= t('.title') %></h1>
-      <p>イキモノ詳細ページ</p>
+      <div class="creature-bg">
+        <%= raw @creature.svg_content %>
+      </div>
+      <div>名前</div>
+      <p><%= @creature.name %></p>
+      <hr>
+      <div>説明</div>
+      <p><%= simple_format(@creature.description) %></p>
+      <p><%= @creature.movement_i18n %></p>
+      <p><%= @creature.size_i18n %></p>
+      <% if logged_in? && current_user.own?(@creature) %>
+        <%= link_to creature_path(@creature), id: "button-delete-#{@creature.id}", data: { turbo_method: :delete, turbo_confirm: t('defaults.delete_confirm') }, class: "aqua-button" do %>
+          削除する
+        <% end %>
+        <%= link_to "戻る", creatures_path, class: "aqua-button" %>
+      <% else %>
+        <%= link_to "アクアリウム", root_path, class: "aqua-button" %>
+      <% end %>
+      <%= link_to "Xに投稿", "#", class: "aqua-button" %>
     </div>
   </div>
 </div>

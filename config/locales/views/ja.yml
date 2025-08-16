@@ -1,9 +1,4 @@
 ja:
-  defaults:
-    flash_message:
-      created: "イキモノをソウゾウしました"
-      not_created: "%イキモノをソウゾウ出来ませんでした"
-      require_login: ログインしてください
   helpers:
     submit:
       create: 登録
@@ -12,26 +7,23 @@ ja:
     label:
       email: メールアドレス
       password: パスワード
-  user_sessions:
-    new:
-      title: ログイン
-      login: ログイン
-      to_register_page: 登録ページへ
-      password_forget: パスワードをお忘れの方はこちら
-  users:
-    new:
-      title: ユーザー登録
-      to_login_page: ログインページへ
+  defaults:
+    delete_confirm: 削除しますか？
+    flash_message:
+      created: イキモノをソウゾウしました
+      not_created: イキモノをソウゾウ出来ませんでした
+      deleted: イキモノを削除しました
+      require_login: ログインしてください
   header:
-    register: "ユーザー登録"
-    login: "ログイン"
-    logout: "ログアウト"
-    top: "アクアリウム"
-    mypage: "マイページ"
-    how_to_play: "遊び方"
-    create: "ソウゾウ"
-    terms: "利用規約"
-    privacy: "プライバシーポリシー"
+    register: ユーザー登録
+    login: ログイン
+    logout: ログアウト
+    top: アクアリウム
+    mypage: マイページ
+    how_to_play: 遊び方
+    create: ソウゾウ
+    terms: 利用規約
+    privacy: プライバシーポリシー
   user_sessions:
     new:
       title: ログイン
@@ -55,3 +47,5 @@ ja:
       title: ソウゾウ
     new:
       title: ソウゾウタイム
+    show:
+      title: ソウゾウしたイキモノ

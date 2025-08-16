@@ -1,8 +1,8 @@
 <header data-controller="menu" class="fixed top-0 left-0 right-0 z-20 flex justify-end items-center gap-3 p-6">
   <% if current_page?(root_path) %>
-    <button type="button" class="aqua-button main-font">
-      <i class="fa-solid fa-book-bookmark mr-2"></i>図鑑：30/215
-    </button>
+    <%= link_to books_path, class: "aqua-button main-font" do %>
+          <i class="fa-solid fa-book-bookmark mr-2"></i>図鑑：30/215
+        <% end %>
   <% end %>
   <button type="button" class="aqua-button" data-action="click->menu#toggle">
     <i class="fa-solid fa-bars  fa-lg"></i>
