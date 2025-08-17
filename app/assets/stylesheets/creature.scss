@@ -1,23 +1,15 @@
-.cre-button {
-  display: block;
+// 生き物 一覧用
+.creture-image {
+  width: 60px;
+  height: 60px;
   padding: 10px;
-  text-decoration: none;
-  background: rgb(83, 140, 183);
+  background: #4d77a4;
   border-radius: 12px;
   overflow: hidden;
-
-  &:hover {
-    background: rgb(41, 108, 158);
-    text-decoration: none;
-  }
-}
-
-.creature-preview {
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  overflow: hidden;
 
   svg {
     width: 100%;
@@ -53,50 +45,8 @@
   }
 }
 
-// 図鑑用ボタン調整
-.creture-button {
-  width: 60px;
-  padding: 10px;
-  text-decoration: none;
-  background: #4d77a4;
-  border-radius: 12px;
-  overflow: hidden;
-
-  &:hover {
-    background: #64a5ce;
-    text-decoration: none;
-  }
-}
-
-.creture-link {
-  color: #4d77a4;
-  font-family: "Kaisei Opti", serif;
-  font-weight: 400;
-  font-style: normal;
-
-  &:hover {
-    color: #64a5ce;
-    text-decoration: none;
-  }
-}
-
-.c-name-link a {
+// お気に入り・チェックボタン調整
+.fc-button {
   position: relative;
-}
-
-.c-name-link a::after {
-  position: absolute;
-  left: 0;
-  content: "";
-  width: 100%;
-  height: 2px;
-  background: #64a5ce;
-  bottom: -8px;
-  transform: scale(0, 1);
-  transform-origin: left top;
-  transition: transform 0.3s;
-}
-
-.c-name-link a:hover::after {
-  transform: scale(1, 1);
+  bottom: -2px;
 }

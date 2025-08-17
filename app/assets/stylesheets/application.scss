@@ -54,3 +54,12 @@ h1 {
   font-size: 2rem;
   margin-bottom: 2rem;
 }
+
+a {
+  color: #4d77a4;
+
+  &:hover {
+    color: #64a5ce;
+    text-decoration: none;
+  }
+}

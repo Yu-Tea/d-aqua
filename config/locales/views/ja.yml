@@ -8,6 +8,7 @@ ja:
       email: メールアドレス
       password: パスワード
   defaults:
+    edit: 編集
     delete_confirm: 削除しますか？
     flash_message:
       created: イキモノをソウゾウしました
@@ -19,7 +20,7 @@ ja:
     login: ログイン
     logout: ログアウト
     top: アクアリウム
-    mypage: マイページ
+    profile: プロフィール
     how_to_play: 遊び方
     create: ソウゾウ
     terms: 利用規約
@@ -49,3 +50,11 @@ ja:
       title: ソウゾウタイム
     show:
       title: ソウゾウしたイキモノ
+  books:
+    index:
+      title: 図鑑
+  profiles:
+    show:
+      title: プロフィール
+    edit:
+      title: プロフィール編集

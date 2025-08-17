@@ -5,26 +5,26 @@
         <% end %>
   <% end %>
   <button type="button" class="aqua-button" data-action="click->menu#toggle">
-    <i class="fa-solid fa-bars  fa-lg"></i>
+    <i class="fa-solid fa-bars fa-lg relative -bottom-px"></i>
   </button>
   
-  <nav class="nav_left line-hover" data-menu-target="panel" data-action="click->menu#close">
+  <nav class="nav_left" data-menu-target="panel" data-action="click->menu#close">
     <div class="nav_right" data-action="click->menu#stop">
       <button type="button"
         class="close-button"
         data-action="click->menu#close">
-        <i class="fa-solid fa-xmark fa-lg"></i>
+        <i class="fa-solid fa-xmark fa-lg relative -bottom-px"></i>
       </button>
       <div class="nav-menu">
-        <ul class="main-font line-hover-menu text-xl sm:text-2xl">
+        <ul class="main-font line-link text-xl sm:text-2xl">
           <% if logged_in? %>
             <% menu_items = [
               { icon: "fa-solid fa-fish-fins", label_key: "header.top", path: root_path },
-              { icon: "fa-solid fa-face-smile", label_key: "header.mypage", path: "#" },
-              { icon: "fa-solid fa-disease", label_key: "header.how_to_play", path: "#" },
+              { icon: "fa-solid fa-face-smile", label_key: "header.profile", path: profile_path },
+              { icon: "fa-solid fa-disease", label_key: "header.how_to_play", path: how_to_play_path },
               { icon: "fa-solid fa-pencil", label_key: "header.create", path: creatures_path },
-              { icon: "fa-solid fa-file-circle-check", label_key: "header.terms", path: "#" },
-              { icon: "fa-solid fa-shield-halved", label_key: "header.privacy", path: "#" },
+              { icon: "fa-solid fa-file-circle-check", label_key: "header.terms", path: terms_path },
+              { icon: "fa-solid fa-shield-halved", label_key: "header.privacy", path: privacy_path },
               { 
                 icon: "fa-solid fa-right-from-bracket", 
                 label_key: "header.logout", 
@@ -37,15 +37,15 @@
               { icon: "fa-solid fa-user", label_key: "header.register", path: new_user_path },
               { icon: "fa-solid fa-right-to-bracket", label_key: "header.login", path: login_path },
               { icon: "fa-solid fa-fish-fins", label_key: "header.top", path: root_path },
-              { icon: "fa-solid fa-disease", label_key: "header.how_to_play", path: "#" },
-              { icon: "fa-solid fa-file-circle-check", label_key: "header.terms", path: "#" },
-              { icon: "fa-solid fa-shield-halved", label_key: "header.privacy", path: "#" }
+              { icon: "fa-solid fa-disease", label_key: "header.how_to_play", path: how_to_play_path },
+              { icon: "fa-solid fa-file-circle-check", label_key: "header.terms", path: terms_path },
+              { icon: "fa-solid fa-shield-halved", label_key: "header.privacy", path: privacy_path }
             ] %>
           <% end %>
 
           <% menu_items.each do |item| %>
             <% next if current_page?(item[:path]) %>
-            <li>
+            <li  class="mb-1.5">
               <% if item[:method] %>
                 <%= link_to item[:path], data: { turbo_method: item[:method] } do %>
                   <i class="<%= item[:icon] %> mr-2"></i><%= t(item[:label_key]) %>
