@@ -83,7 +83,6 @@ export default class extends Controller {
     // 描画完了時にpathsに追加（Undo機能のため）
     if (this.isDrawing && this.currentPath) {
       this.paths.push(this.currentPath);
-      console.log(`線を追加しました。現在の線の数: ${this.paths.length}`);
     }
 
     this.isDrawing = false;
@@ -94,7 +93,6 @@ export default class extends Controller {
   // Undo機能：最後に描いた線を削除
   undo() {
     if (this.paths.length === 0) {
-      console.log("戻る線がありません");
       return;
     }
 
@@ -102,7 +100,6 @@ export default class extends Controller {
     const lastPath = this.paths.pop();
     lastPath.remove();
 
-    console.log(`線を1つ戻しました。残り線の数: ${this.paths.length}`);
     this.updateSvgData();
   }
 
@@ -140,7 +137,6 @@ export default class extends Controller {
     this.paths.forEach((path) => path.remove());
     this.paths = [];
     this.updateSvgData();
-    console.log("全て消去しました");
   }
 
   updateSvgData() {

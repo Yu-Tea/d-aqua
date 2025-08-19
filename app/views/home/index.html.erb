@@ -1,4 +1,25 @@
-
 <div class="max-w-md"><%= render 'shared/flash_message' %></div>
 
-<div><p>トップページ</p></div>
+<div class="ocean-container" 
+     data-controller="ocean" 
+     data-action="keydown@document->ocean#handleKeydown">
+  
+    <!-- 生き物が表示されるエリア -->
+    <div class="creatures-area" data-ocean-target="creaturesArea">
+      <!-- JavaScriptで動的に生成 -->
+    </div>
+</div>
+
+<!-- モーダルウィンドウ -->
+<div id="creature-modal" 
+     class="modal" 
+     data-ocean-target="modal">
+  <div class="modal-content">
+    <span class="close" 
+          data-ocean-target="closeModal" 
+          data-action="click->ocean#closeModalClick">&times;</span>
+    <div id="modal-body" data-ocean-target="modalBody">
+      <!-- JavaScriptで動的に内容を挿入 -->
+    </div>
+  </div>
+</div>

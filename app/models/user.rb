@@ -9,6 +9,9 @@ class User < ApplicationRecord
 
   has_many :creatures, dependent: :destroy
 
+  has_many :books, dependent: :destroy
+  has_many :discovered_creatures, through: :books, source: :creature
+
   def own?(object)
     id == object&.user_id
   end

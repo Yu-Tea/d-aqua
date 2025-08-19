@@ -12,3 +12,6 @@ application.register("menu", MenuController);
 
 import DrawingController from "./drawing_controller";
 application.register("drawing", DrawingController);
+
+import OceanController from "./ocean_controller";
+application.register("ocean", OceanController);

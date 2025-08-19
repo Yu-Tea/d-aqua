@@ -12,4 +12,14 @@ Rails.application.routes.draw do
   get '/how_to_play',   to: 'static_pages#how_to_play',   as: :how_to_play
   get '/terms',   to: 'static_pages#terms',   as: :terms
   get '/privacy', to: 'static_pages#privacy', as: :privacy
+
+  namespace :api do
+    namespace :v1 do
+      resources :creatures, only: [:show] do
+        collection do
+          get :random
+        end
+      end
+    end
+  end
 end

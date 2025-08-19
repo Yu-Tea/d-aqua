@@ -7,9 +7,14 @@ class Creature < ApplicationRecord
   validates :size, presence: true
 
   # enumで定義（integer型）
-  enum movement: { swim: 0, float: 1, rest: 2 }
-  enum size: { small: 0, medium: 1, large: 2 }
+  enum :movement, { swim: 0, float: 1, rest: 2 }
+  enum :size, { small: 0, medium: 1, large: 2 }
+
+  has_many :books, dependent: :destroy
+  has_many :discoverers, through: :books, source: :user
   
+  # トップページ用のランダム取得メソッド
+  scope :random_by_movement, ->(movement_type) { where(movement: movement_type).order('RANDOM()').limit(1) }
 
   # uuidの短縮
   def short_uuid
