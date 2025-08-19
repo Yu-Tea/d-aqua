@@ -19,6 +19,9 @@ Rails.application.routes.draw do
         collection do
           get :random
         end
+        member do
+          post :discover  # 🎯 生き物発見用のルート
+        end
       end
     end
   end

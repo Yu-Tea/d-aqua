@@ -8,6 +8,9 @@
       <div>名前</div>
       <p><%= @creature.name %></p>
       <hr>
+      <div>制作者</div>
+      <p><%= @creature.user.name %></p>
+      <hr>
       <div>説明</div>
       <p><%= simple_format(@creature.description) %></p>
       <p><%= @creature.movement_i18n %></p>

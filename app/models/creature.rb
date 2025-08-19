@@ -2,7 +2,7 @@ class Creature < ApplicationRecord
   belongs_to :user
   
   validates :name, presence: true, length: { maximum: 10 }
-  validates :description, length: { maximum: 200 }
+  validates :description, presence: true, length: { maximum: 200 }
   validates :movement, presence: true
   validates :size, presence: true
 
@@ -15,6 +15,11 @@ class Creature < ApplicationRecord
   
   # トップページ用のランダム取得メソッド
   scope :random_by_movement, ->(movement_type) { where(movement: movement_type).order('RANDOM()').limit(1) }
+
+  # この生き物を発見したユーザー数
+  def discovery_count
+    books.count
+  end
 
   # uuidの短縮
   def short_uuid

@@ -15,4 +15,22 @@ class User < ApplicationRecord
   def own?(object)
     id == object&.user_id
   end
+
+  # 生き物を発見するメソッド
+  def discover(creature)
+    # 既に発見済みかチェック
+    return false if discovered?(creature)
+    
+    # 発見登録
+    books.create!(creature: creature)
+    true # 新発見の場合はtrue
+  rescue ActiveRecord::RecordInvalid
+    false # 重複などのエラーの場合はfalse
+  end
+  
+  # 発見済みかチェック
+  def discovered?(creature)
+    books.exists?(creature: creature)
+  end
+  
 end

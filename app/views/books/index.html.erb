@@ -1,9 +1,35 @@
 <% content_for(:title, t('.title')) %>
 <div class="container mx-auto h-screen">
   <div class="bg_subpage">
-    <div class="mx-auto px-8 w-full max-w-lg">
+    <div class="mx-auto px-8 lg:px-24 w-full">
       <h1><%= t('.title') %></h1>
       <p>アナタが見つけたイキモノが記録されます。</p>
+      <% if @books.present? %>
+        <p>アナタがソウゾウした生き物の一覧です。</p>
+        <br><br>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-8">
+          <% @books.each do |book| %>
+            <div class="bg-white flex items-center p-3 rounded-xl gap-1.5">
+              <div class="creture-image mr-1">
+                <%= raw book.creature.svg_content %>
+              </div>
+              <div class="flex-auto line-link mr-2">
+                <%= link_to creature_path(book.creature), class: "text-xl lg:text-2xl flex-auto" do %>
+                  <%= book.creature.name %>
+                <% end %>
+              </div>
+              <%= link_to "#", class: "fc-button" do %>
+                <i class="fa-regular fa-heart fa-xl"></i>
+              <% end %>
+              <%= link_to "#", class: "fc-button" do %>
+                <i class="fa-regular fa-square-check fa-xl"></i>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+      <p>まだ生き物を発見していません</p>
+      <% end %>
     </div>
   </div>
 </div>

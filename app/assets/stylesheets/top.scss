@@ -202,7 +202,7 @@ nav ul {
     transform: translateX(0) translateY(0) scaleX(-1);
   }
   100% {
-    transform: translateX(0) translateY(0) scaleX(1);/* 向き変更 */
+    transform: translateX(0) translateY(0) scaleX(1); /* 向き変更 */
   }
 }
 
@@ -278,31 +278,18 @@ nav ul {
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(5px);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .modal-content {
-  background-color: #fff;
-  margin: 5% auto;
-  padding: 30px;
-  border-radius: 15px;
-  width: 90%;
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  border-radius: 10px;
+  width: 80%;
   max-width: 500px;
   position: relative;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  animation: modalSlideIn 0.3s ease-out;
-}
-
-@keyframes modalSlideIn {
-  from {
-    transform: translateY(-50px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
 }
 
 .close {
@@ -311,188 +298,84 @@ nav ul {
   font-size: 28px;
   font-weight: bold;
   cursor: pointer;
-
-  &:hover,
-  &:focus {
-    color: #000;
-    text-decoration: none;
-  }
+  position: absolute;
+  right: 15px;
+  top: 10px;
 }
 
-#modal-body {
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+}
+
+.creature-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-
-  .creature-image {
-    width: 150px;
-    height: 150px;
-    object-fit: contain;
-    border-radius: 50%;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  }
-
-  .creature-name {
-    font-size: 1.8rem;
-    color: #2c3e50;
-    margin-bottom: 10px;
-  }
-
-  .creature-description {
-    color: #7f8c8d;
-    line-height: 1.6;
-    margin-bottom: 20px;
-  }
-
-  .creature-info {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
-
-    .info-item {
-      text-align: center;
-
-      .label {
-        font-size: 0.9rem;
-        color: #95a5a6;
-        display: block;
-      }
-
-      .value {
-        font-size: 1.1rem;
-        color: #2c3e50;
-        font-weight: bold;
-      }
-    }
-  }
-
-  .discovery-badge {
-    display: inline-block;
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    font-weight: bold;
-
-    &.new-discovery {
-      background: linear-gradient(45deg, #f39c12, #e67e22);
-      color: white;
-      animation: pulse 2s infinite;
-    }
-
-    &.already-discovered {
-      background: #ecf0f1;
-      color: #7f8c8d;
-    }
-  }
 }
 
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-  }
+.creature-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
-// 発見バッジの追加アニメーション
-@keyframes sparkle {
-  0% {
-    box-shadow: 0 0 5px rgba(243, 156, 18, 0.5);
-  }
-  50% {
-    box-shadow: 0 0 20px rgba(243, 156, 18, 0.8),
-      0 0 30px rgba(230, 126, 34, 0.6);
-  }
-  100% {
-    box-shadow: 0 0 5px rgba(243, 156, 18, 0.5);
-  }
+.creature-image {
+  width: 200px;
+  height: 200px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #4d77a4;
+  overflow: hidden;
 }
 
-.discovery-badge.new-discovery {
-  animation: pulse 2s infinite, sparkle 3s infinite;
+/* SVG要素のスタイリング */
+.creature-image svg {
+  width: 80%;
+  height: 80%;
+  max-width: 160px;
+  max-height: 160px;
 }
 
-// 登録ボタンのスタイル
-.register-button {
-  background: linear-gradient(45deg, #3498db, #2980b9);
-  color: white;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 25px;
-  font-size: 1rem;
+.creature-name {
+  margin: 0 0 10px 0;
+  color: #333;
+  font-size: 24px;
+}
+
+/* NEW!!を初期状態では非表示 */
+.creature-new {
+  display: none;
+  color: #ff6b6b;
+  font-size: 2rem;
   font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin-top: 15px;
+  text-align: center;
+  margin-bottom: 1rem;
+  animation: newDiscoveryAnimation 0.5s ease-out;
+}
 
-  &:hover {
-    background: linear-gradient(45deg, #2980b9, #1abc9c);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+/* 表示時のアニメーション */
+@keyframes newDiscoveryAnimation {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
   }
-
-  &:active {
-    transform: translateY(0);
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
   }
-
-  &:disabled {
-    background: #bdc3c7;
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
+  100% {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
-// レスポンシブデザイン
-@media (max-width: 768px) {
-  .modal-content {
-    width: 95%;
-    margin: 10% auto;
-    padding: 20px;
-  }
-
-  .creature-large {
-    width: 60px;
-    height: 60px;
-  }
-
-  .creature-medium {
-    width: 45px;
-    height: 45px;
-  }
-
-  .creature-small {
-    width: 30px;
-    height: 30px;
-  }
-
-  #modal-body {
-    .creature-image {
-      width: 120px;
-      height: 120px;
-    }
-
-    .creature-name {
-      font-size: 1.5rem;
-    }
-
-    .creature-info {
-      flex-direction: column;
-      gap: 10px;
-    }
-  }
-}
-
-@media (max-width: 480px) {
-  .ocean-container {
-    height: 100vh;
-  }
-
-  .modal-content {
-    margin: 5% auto;
-    padding: 15px;
-  }
+/* 表示状態のクラス */
+.creature-new.show {
+  display: block;
 }
