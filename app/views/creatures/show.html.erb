@@ -1,25 +1,23 @@
 <div class="container mx-auto h-screen">
   <div class="bg_subpage">
-    <div class="mx-auto px-8 w-full max-w-lg">
-      <h1><%= t('.title') %></h1>
+    <div class="mx-auto px-8 w-full max-w-lg text-center">
+      <h2 class="text-3xl sm:text-4xl mb-1"><%= @creature.name %></h2>
+      <p>制作者：<%= @creature.user.name %></p>
       <div class="creature-bg">
         <%= raw @creature.svg_content %>
       </div>
-      <div>名前</div>
-      <p><%= @creature.name %></p>
-      <hr>
-      <div>制作者</div>
-      <p><%= @creature.user.name %></p>
-      <hr>
-      <div>説明</div>
-      <p><%= simple_format(@creature.description) %></p>
-      <p><%= @creature.movement_i18n %></p>
-      <p><%= @creature.size_i18n %></p>
+      
+      <p>動きタイプ：<%= @creature.movement_i18n %>　大きさ：<%= @creature.size_i18n %></p>
+      <p>このイキモノを図鑑に登録した人：<%= @discovery_count %>人</p>
+      <div class="bg-white text-left p-5 mt-2 mb-8 rounded-lg bg-opacity-60">
+        <%= simple_format(@creature.description) %>
+      </div>
+      
       <% if logged_in? && current_user.own?(@creature) %>
         <%= link_to creature_path(@creature), id: "button-delete-#{@creature.id}", data: { turbo_method: :delete, turbo_confirm: t('defaults.delete_confirm') }, class: "aqua-button" do %>
           削除する
         <% end %>
-        <%= link_to "戻る", creatures_path, class: "aqua-button" %>
+        <%= link_to "戻る", "#", onclick: "history.back(); return false;", method: :get,  class: "aqua-button" %>
       <% else %>
         <%= link_to "アクアリウム", root_path, class: "aqua-button" %>
       <% end %>

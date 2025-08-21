@@ -12,9 +12,10 @@
             data-ocean-target="closeModal" 
             data-action="click->ocean#closeModalClick">&times;</span>
 
-      <div class="creature-new">NEW!!</div>
+      
       <div id="modal-body" data-ocean-target="modalBody">
         <div class="creature-details">
+          <div class="creature-new">NEW!!</div>
           <!-- SVG用のdiv -->
           <div class="creature-image-container">
             <div data-ocean-target="creatureSvg" 
@@ -23,9 +24,9 @@
           </div>
 
           <div class="creature-info">
-            <h2 data-ocean-target="creatureName" class="creature-name">生き物名</h2>
+            <h2 data-ocean-target="creatureName">生き物名</h2>
             制作者：<span data-ocean-target="creatureCreatorName">制作者名</span>
-            <p data-ocean-target="creatureDescription">生き物の説明</p>
+            <p data-ocean-target="creatureDescription" class="my-2">生き物の説明</p>
           </div>
           <%= link_to "Xに投稿", "#", class: "aqua-button" %>
         </div>

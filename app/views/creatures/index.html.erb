@@ -1,49 +1,15 @@
 <% content_for(:title, t('.title')) %>
 <div class="container mx-auto h-screen">
   <div class="bg_subpage">
-    <div class="mx-auto px-8 lg:px-24 w-full">
+    <div class="mx-auto px-8 lg:px-24 w-full text-center">
       <h1><%= t('.title') %></h1>
       <p>生き物をソウゾウしてアクアリウムで泳がせよう。</p>
       <%= link_to "ソウゾウする", new_creature_path, class: "aqua-button" %>
-      <br><br>
       <% if @creatures.present? %>
         <p>アナタがソウゾウした生き物の一覧です。</p>
-        <br><br>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-8 my-10">
           <% @creatures.each do |creature| %>
-            <div class="bg-white flex items-center p-3 rounded-xl gap-1.5 lg:pr-14">
-              <div class="creture-image mr-1">
-                <%= raw creature.svg_content %>
-              </div>
-              <div class="flex-auto line-link">
-                <%= link_to creature_path(creature), class: "text-xl lg:text-2xl flex-auto" do %>
-                  <%= creature.name %>
-                <% end %>
-              </div>
-            </div>
-          <% end %>
-        </div>
-        <br><br>
-        <p>図鑑ページ用のレイアウト</p>
-        <br><br>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-8">
-          <% @creatures.each do |creature| %>
-            <div class="bg-white flex items-center p-3 rounded-xl gap-1.5">
-              <div class="creture-image mr-1">
-                <%= raw creature.svg_content %>
-              </div>
-              <div class="flex-auto line-link mr-2">
-                <%= link_to creature_path(creature), class: "text-xl lg:text-2xl flex-auto" do %>
-                  <%= creature.name %>
-                <% end %>
-              </div>
-              <%= link_to "#", class: "fc-button" do %>
-                <i class="fa-regular fa-heart fa-xl"></i>
-              <% end %>
-              <%= link_to "#", class: "fc-button" do %>
-                <i class="fa-regular fa-square-check fa-xl"></i>
-              <% end %>
-            </div>
+            <%= render 'shared/creature_card', creature: creature %>
           <% end %>
         </div>
       <% end %>

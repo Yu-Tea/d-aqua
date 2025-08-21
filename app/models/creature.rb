@@ -16,11 +16,6 @@ class Creature < ApplicationRecord
   # トップページ用のランダム取得メソッド
   scope :random_by_movement, ->(movement_type) { where(movement: movement_type).order('RANDOM()').limit(1) }
 
-  # この生き物を発見したユーザー数
-  def discovery_count
-    books.count
-  end
-
   # uuidの短縮
   def short_uuid
     Base64.urlsafe_encode64([id.delete('-')].pack("H*")).tr('=', '')

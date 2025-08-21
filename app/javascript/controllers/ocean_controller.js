@@ -1,9 +1,8 @@
 import { Controller } from "@hotwired/stimulus";
 
 const CREATURE_REMOVE_DELAY = 40000; // 生き物の削除までの時間
-const FADE_IN_DURATION = 1050; // 生き物のフェードイン時間
-const FADE_OUT_DURATION = 1000; // 生き物のフェードアウト時間
-const NEW_DISCOVERY_DISPLAY = 3000; // NEWが消えるまでの時間
+const FADE_IN_DURATION = 500; // 生き物のフェードイン時間
+const FADE_OUT_DURATION = 500; // 生き物のフェードアウト時間
 
 export default class extends Controller {
   static targets = [
@@ -86,6 +85,7 @@ export default class extends Controller {
     element.dataset.creatureMovement = creature.movement;
     element.dataset.creatureSize = creature.size;
     element.dataset.creatureCreatorName = creature.creator_name;
+    element.dataset.canDiscover = creature.can_discover.toString();
   }
 
   applySvgStyle(element) {
@@ -127,6 +127,16 @@ export default class extends Controller {
   // 生き物のクリックイベント
   showCreature(event) {
     const element = event.currentTarget;
+
+    // データ属性の確認
+    console.log("=== データ属性 ===");
+    console.log("生き物ID:", element.dataset.creatureId);
+    console.log("can_discover:", element.dataset.canDiscover);
+    console.log(
+      "can_discover (boolean):",
+      element.dataset.canDiscover === "true"
+    );
+
     const creatureData = {
       id: element.dataset.creatureId,
       name: element.dataset.creatureName,
@@ -138,18 +148,14 @@ export default class extends Controller {
       can_discover: element.dataset.canDiscover === "true",
     };
 
-    console.log("生き物データ:", creatureData);
-    console.log("発見可能？:", creatureData.can_discover);
+    console.log("🎯 creatureData:", creatureData);
 
     // モーダルを表示
     this.showModal(creatureData);
 
     // 発見可能な場合のみ発見処理を実行
     if (creatureData.can_discover) {
-      console.log("🎯 発見処理を実行します！");
       this.discoverCreature(creatureData.id);
-    } else {
-      console.log("❌ 既に発見済みです");
     }
   }
 
@@ -178,14 +184,17 @@ export default class extends Controller {
         },
       });
 
+      if (!response.ok) {
+        return;
+      }
+
       const data = await response.json();
 
       if (data.success && data.is_new_discovery) {
-        // 🎯 NEW!!要素を表示
         this.showNewDiscovery();
       }
     } catch (error) {
-      console.error("発見処理でエラーが発生しました:", error);
+      console.error("discoverCreature でエラーが発生しました:", error);
     }
   }
 
@@ -193,7 +202,6 @@ export default class extends Controller {
     const newElement = this.element.querySelector(".creature-new");
     if (newElement) {
       newElement.classList.add("show");
-      setTimeout(() => this.hideNewDiscovery(), NEW_DISCOVERY_DISPLAY);
     }
   }
 

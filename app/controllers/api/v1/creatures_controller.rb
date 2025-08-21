@@ -4,9 +4,6 @@ class Api::V1::CreaturesController < Api::V1::BaseController
   def random
     # movementパラメータの処理を改善
     movement_param = params[:movement] || ['swim', 'float', 'rest'].sample
-    # ログイン状態に関係なく発見済みIDを取得
-    discovered_ids = current_user&.books&.pluck(:creature_id) || []
-
     # enumの数値に変換
     movement_value = Creature.movements[movement_param]
     
@@ -21,7 +18,7 @@ class Api::V1::CreaturesController < Api::V1::BaseController
                       .select('creatures.*, users.name as creator_name')
                       .where(movement: movement_value)
     
-    # 🎯 ログイン時のみ未発見優先ロジックを適用
+    # ログイン時のみ未発見優先ロジック
     creature = nil
     if current_user
       discovered_ids = current_user.books.pluck(:creature_id)
@@ -37,7 +34,6 @@ class Api::V1::CreaturesController < Api::V1::BaseController
     if creature
       # SVG処理
       svg_content = get_svg_content(creature)
-
       # 発見状態を返す（ログイン時のみ）
       is_discovered = current_user ? current_user.discovered?(creature) : false
 
@@ -50,7 +46,7 @@ class Api::V1::CreaturesController < Api::V1::BaseController
         svg_content: svg_content,
         creator_name: creature.creator_name,
         discovered: is_discovered,
-        can_discover: current_user.present? && !is_discovered # 🎯 発見可能かどうか
+        can_discover: current_user.present? && !is_discovered # 発見可能かどうか
       }
     else
       render json: { error: '生き物が見つかりませんでした' }, status: 404
@@ -59,40 +55,44 @@ class Api::V1::CreaturesController < Api::V1::BaseController
 
   # 生き物発見用のエンドポイント
   def discover
-  creature = Creature.find(params[:id])
-  
-  # ここでbookテーブルに登録！
-  book = current_user.books.find_or_create_by(creature: creature)
-  
-  # 新発見かどうかを判定
-  is_new_discovery = book.created_at == book.updated_at
-  
-  render json: {
-    success: true,
-    is_new_discovery: is_new_discovery
-  }
-end
+    puts "🎯🎯🎯 discover アクションが呼ばれました！"
+    puts "🎯 ユーザーID: #{current_user.id}"
+    puts "🎯 生き物ID: #{params[:id]}"
+
+    creature = Creature.find(params[:id])
+    
+    # 🎯 シンプルで安全な実装
+    book = current_user.books.find_or_create_by(creature: creature) do |new_book|
+      puts "✅ 新発見！Book を作成中..."
+    end
+
+    if book.persisted?
+      if book.previously_new_record?
+        puts "✅ 新発見成功: Book ID = #{book.id}"
+        render json: { success: true, is_new_discovery: true }
+      else
+        puts "❌ 既に発見済み"
+        render json: { success: true, is_new_discovery: false }
+      end
+    else
+      puts "💥 作成エラー: #{book.errors.full_messages}"
+      render json: { success: false, error: book.errors.full_messages.join(', ') }
+    end
+    rescue ActiveRecord::RecordNotFound
+      render json: { success: false, error: '生き物が見つかりません' }, status: 404
+    rescue => e
+      puts "💥 予期しないエラー: #{e.message}"
+      render json: { success: false, error: '発見処理中にエラーが発生しました' }
+  end
   
   def show
     creature = Creature.joins(:user)
                       .select('creatures.*, users.name as creator_name')
                       .find(params[:id])
     
-    discovered_ids = current_user&.books&.pluck(:creature_id) || []
-    
-    # 発見処理をここで実行
-    is_new_discovery = false
-    if current_user && !discovered_ids.include?(creature.id)
-      begin
-        is_new_discovery = current_user.discover(creature)
-      rescue => e
-        Rails.logger.error "Show discovery error: #{e.message}"
-        is_new_discovery = false
-      end
-    end
-    
     # SVG処理
     svg_content = get_svg_content(creature)
+    is_discovered = current_user ? current_user.discovered?(creature) : false
     
     render json: {
       id: creature.id,
@@ -102,8 +102,8 @@ end
       size: creature.size,
       svg_content: svg_content,
       creator_name: creature.creator_name,
-      discovered: current_user ? true : false,  # ログイン時のみtrue
-      is_new: is_new_discovery
+      discovered: is_discovered,
+      can_discover: current_user.present? && !is_discovered
     }
   end
 

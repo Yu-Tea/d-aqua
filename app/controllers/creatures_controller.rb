@@ -11,6 +11,7 @@ class CreaturesController < ApplicationController
 
   def show
     @creature = Creature.find_by_short_uuid(params[:id])
+    @discovery_count = @creature.books.count
   end
 
   def create

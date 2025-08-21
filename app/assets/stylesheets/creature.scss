@@ -1,7 +1,7 @@
 // 生き物 一覧用
 .creture-image {
-  width: 60px;
-  height: 60px;
+  width: 54px;
+  height: 54px;
   padding: 10px;
   background: #4d77a4;
   border-radius: 12px;
@@ -36,7 +36,7 @@
   background-color: #5a8bbc;
   padding: 20px;
   border-radius: 15px;
-  margin-bottom: 30px;
+  margin: 20px 0;
 
   svg {
     width: 60% !important;
@@ -49,4 +49,186 @@
 .fc-button {
   position: relative;
   bottom: -2px;
+}
+
+.m-type {
+  min-width: 26px;
+  min-height: 26px;
+  background-color: #78ade2;
+  color: #fff;
+  border-radius: 5px;
+  text-align: center;
+  line-height: 26px;
+  border: none;
+}
+
+.s-type {
+  min-width: 26px;
+  min-height: 26px;
+  background-color: #5096dc;
+  color: #fff;
+  border-radius: 5px;
+  text-align: center;
+  line-height: 26px;
+  border: none;
+}
+
+
+/* 生き物が泳ぐ用の調整 */
+.ocean-container {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 104px);
+  top: 104px;
+  overflow: hidden;
+}
+
+.creatures-area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; // 背景はクリックできないように
+  z-index: 1;
+}
+
+// 生き物の基本スタイル
+.creature {
+  position: absolute;
+  cursor: pointer;
+  pointer-events: auto; // 生き物はクリック可能
+  transition: transform 0.3s ease;
+  z-index: 10;
+
+  &:hover {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+  }
+
+  svg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+// サイズ別スタイル
+.creature-small {
+  width: 30px;
+  height: 30px;
+}
+
+.creature-medium {
+  width: 60px;
+  height: 60px;
+}
+
+.creature-large {
+  width: 100px;
+  height: 100px;
+}
+
+// movement別のアニメーション
+@keyframes swim-anime {
+  0% {
+    transform: translateX(0) translateY(0) scaleX(1);
+  }
+  40% {
+    transform: translateX(-700px) translateY(-10px) scaleX(1);
+  }
+  50% {
+    transform: translateX(-700px) translateY(-10px) scaleX(-1); /* 向き変更 */
+  }
+  90% {
+    transform: translateX(0) translateY(0) scaleX(-1);
+  }
+  100% {
+    transform: translateX(0) translateY(0) scaleX(1); /* 向き変更 */
+  }
+}
+
+@keyframes float-anime {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  40% {
+    transform: translate(15px, 30px) rotate(10deg);
+  }
+
+  65% {
+    transform: translate(-5px, 20px) rotate(0deg);
+  }
+  85% {
+    transform: translate(8px, 10px) rotate(-10deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+}
+
+@keyframes rest-anime {
+  0% {
+    transform: rotate(0deg);
+  }
+  47% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+  56% {
+    transform: rotate(-10deg);
+  }
+  59% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.creature-swim {
+  animation: swim-anime 14.7s ease-in-out infinite;
+  animation-delay: 0.3s;
+  animation-fill-mode: both;
+}
+
+.creature-float {
+  animation: float-anime 18.3s linear infinite;
+}
+
+.creature-rest {
+  animation: rest-anime 7.5s ease-in-out infinite;
+}
+
+// フェードイン・フェードアウト用
+.creature-fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+.creature-fade-out {
+  animation: fadeOut 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.7);
+  }
 }

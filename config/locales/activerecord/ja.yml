@@ -15,7 +15,7 @@ ja:
         movement: 動き
         swim: すいすい
         float: ぷかぷか
-        rest: ちょこん
+        rest: もぞもぞ
         size: サイズ
         small: 小さい
         medium: 普通
@@ -25,8 +25,8 @@ ja:
       movement:
         swim: すいすい
         float: ぷかぷか
-        rest: ちょこん
+        rest: もぞもぞ
       size:
-        small: 小さい
-        medium: 普通
-        large: 大きい
+        small: 小
+        medium: 中
+        large: 大
