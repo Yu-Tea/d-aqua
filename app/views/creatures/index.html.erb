@@ -7,12 +7,13 @@
       <%= link_to "ソウゾウする", new_creature_path, class: "aqua-button" %>
       <% if @creatures.present? %>
         <p>アナタがソウゾウした生き物の一覧です。</p>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-8 my-10">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-8 my-6">
           <% @creatures.each do |creature| %>
             <%= render 'shared/creature_card', creature: creature %>
           <% end %>
         </div>
       <% end %>
+      <%= paginate @creatures %>
     </div>
   </div>
 </div>

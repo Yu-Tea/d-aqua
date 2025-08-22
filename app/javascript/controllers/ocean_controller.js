@@ -1,6 +1,6 @@
 import { Controller } from "@hotwired/stimulus";
 
-const CREATURE_REMOVE_DELAY = 40000; // 生き物の削除までの時間
+const CREATURE_REMOVE_DELAY = 30000; // 生き物の削除までの時間
 const FADE_IN_DURATION = 500; // 生き物のフェードイン時間
 const FADE_OUT_DURATION = 500; // 生き物のフェードアウト時間
 
@@ -27,8 +27,12 @@ export default class extends Controller {
 
   // 生き物の生成の開始
   startCreatureGeneration() {
-    for (let i = 0; i < 3; i++) this.createCreature();
-    this.creatureInterval = setInterval(() => this.createCreature(), 5300); // 生き物を生成する間隔
+    [0, 1, 2].forEach((index) => {
+      setTimeout(() => {
+        this.createCreature();
+      }, index * 500); // 500msずつずらして最初の3匹生成
+    });
+    this.creatureInterval = setInterval(() => this.createCreature(), 5100); // 生き物を生成する間隔
   }
 
   async createCreature() {
@@ -47,7 +51,7 @@ export default class extends Controller {
   // 生き物の要素を生成して表示
   renderCreature(creature) {
     const creatureElement = document.createElement("div");
-    creatureElement.className = `creature creature-${creature.size} creature-fade-in`;
+    creatureElement.className = `creature creature-${creature.movement}-${creature.size} creature-fade-in`;
     this.setCreatureDataAttributes(creatureElement, creature);
     creatureElement.dataset.action = "click->ocean#showCreature";
     creatureElement.style.position = "absolute";
@@ -66,6 +70,16 @@ export default class extends Controller {
     setTimeout(() => {
       creatureElement.classList.remove("creature-fade-in");
       creatureElement.classList.add(`creature-${creature.movement}`);
+
+      // 動きswimタイプの場合のみ、さらに細分化したクラスを追加
+      if (creature.movement === "swim") {
+        const swimPatterns = ["gentle", "active", "lazy"];
+        const randomPattern =
+          swimPatterns[Math.floor(Math.random() * swimPatterns.length)];
+
+        // 基本クラス + 詳細パターンクラスを両方付与
+        creatureElement.classList.add(`swim-${randomPattern}`);
+      }
     }, FADE_IN_DURATION);
 
     setTimeout(() => {
@@ -128,15 +142,6 @@ export default class extends Controller {
   showCreature(event) {
     const element = event.currentTarget;
 
-    // データ属性の確認
-    console.log("=== データ属性 ===");
-    console.log("生き物ID:", element.dataset.creatureId);
-    console.log("can_discover:", element.dataset.canDiscover);
-    console.log(
-      "can_discover (boolean):",
-      element.dataset.canDiscover === "true"
-    );
-
     const creatureData = {
       id: element.dataset.creatureId,
       name: element.dataset.creatureName,
@@ -147,8 +152,6 @@ export default class extends Controller {
       creator_name: element.dataset.creatureCreatorName,
       can_discover: element.dataset.canDiscover === "true",
     };
-
-    console.log("🎯 creatureData:", creatureData);
 
     // モーダルを表示
     this.showModal(creatureData);
@@ -192,9 +195,20 @@ export default class extends Controller {
 
       if (data.success && data.is_new_discovery) {
         this.showNewDiscovery();
+        // 新発見の場合、ヘッダーカウントを更新
+        this.updateBookCount(data.discovered_count, data.total_creatures_count);
       }
     } catch (error) {
       console.error("discoverCreature でエラーが発生しました:", error);
+    }
+  }
+
+  // ヘッダーのブックカウント更新関数
+  updateBookCount(discoveredCount, totalCount) {
+    const bookCountElement = document.querySelector("[data-book-count]");
+    if (bookCountElement) {
+      // カウント表示を更新
+      bookCountElement.textContent = `図鑑：${discoveredCount}/${totalCount}`;
     }
   }
 
@@ -226,5 +240,6 @@ export default class extends Controller {
 
   closeModalClick() {
     this.closeModal();
+    this.hideNewDiscovery();
   }
 }

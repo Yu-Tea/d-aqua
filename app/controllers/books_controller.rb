@@ -2,10 +2,9 @@ class BooksController < ApplicationController
   before_action :require_login
 
   def index
-    @books = current_user.books.includes(:creature => :user)
-                        .order(created_at: :desc)
+    @books = current_user.books.includes(:creature => :user).order(created_at: :desc).page(params[:page]).per(5)
     
-    # 統計情報
-    @total_discoveries = @books.count
+    @discovered_count = current_user.books.count
+    @total_creatures_count = Creature.count
   end
 end

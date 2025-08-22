@@ -21,6 +21,10 @@ body {
   font-style: normal;
 }
 
+.main-color {
+  color: #4d77a4;
+}
+
 /* 光の画像の設定 */
 .bg-light {
   position: fixed;
@@ -52,7 +56,7 @@ h1 {
   font-style: normal;
   color: #4d77a4;
   font-size: 2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 0.6rem;
 }
 
 h2 {
@@ -65,10 +69,10 @@ h2 {
 }
 
 a {
-  color: #4d77a4;
+  color: #328dc7;
 
   &:hover {
-    color: #64a5ce;
+    color: #3ebde7;
     text-decoration: none;
   }
 }

@@ -55,33 +55,41 @@ class Api::V1::CreaturesController < Api::V1::BaseController
 
   # 生き物発見用のエンドポイント
   def discover
-    puts "🎯🎯🎯 discover アクションが呼ばれました！"
-    puts "🎯 ユーザーID: #{current_user.id}"
-    puts "🎯 生き物ID: #{params[:id]}"
-
     creature = Creature.find(params[:id])
     
-    # 🎯 シンプルで安全な実装
     book = current_user.books.find_or_create_by(creature: creature) do |new_book|
-      puts "✅ 新発見！Book を作成中..."
     end
 
     if book.persisted?
+      # ヘッダー図鑑ボタン用のカウント情報
+      discovered_count = current_user.books.count
+      total_creatures_count = Creature.count
+
       if book.previously_new_record?
-        puts "✅ 新発見成功: Book ID = #{book.id}"
-        render json: { success: true, is_new_discovery: true }
+        # 発見成功
+        render json: { 
+        success: true, 
+        is_new_discovery: true,
+        # カウント情報を追加
+        discovered_count: discovered_count,
+        total_creatures_count: total_creatures_count,
+      }
       else
-        puts "❌ 既に発見済み"
-        render json: { success: true, is_new_discovery: false }
+        # すでに発見済み
+        render json: { 
+        success: true, 
+        is_new_discovery: false,
+        # カウント情報を追加（変化なしでも一貫性のため）
+        discovered_count: discovered_count,
+        total_creatures_count: total_creatures_count
+      }
       end
     else
-      puts "💥 作成エラー: #{book.errors.full_messages}"
       render json: { success: false, error: book.errors.full_messages.join(', ') }
     end
     rescue ActiveRecord::RecordNotFound
       render json: { success: false, error: '生き物が見つかりません' }, status: 404
     rescue => e
-      puts "💥 予期しないエラー: #{e.message}"
       render json: { success: false, error: '発見処理中にエラーが発生しました' }
   end
   

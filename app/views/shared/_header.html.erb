@@ -1,14 +1,16 @@
 <header data-controller="menu" class="fixed top-0 left-0 right-0 z-20 flex justify-end items-center gap-3 p-2 sm:p-5">
   <% if current_page?(root_path) && logged_in? %>
-    <%= link_to books_path, class: "aqua-button main-font" do %>
-          <i class="fa-solid fa-book-bookmark mr-2"></i>図鑑：<%= @discovered_count %>/<%= @total_creatures_count %>
-        <% end %>
+    <%= link_to books_path, class: "header-button main-font px-4 py-2" do %>
+      <i class="fa-solid fa-book-bookmark mr-2"></i>
+      <span data-book-count>図鑑：<%= @discovered_count %>/<%= @total_creatures_count %></span>
+    <% end %>
   <% end %>
-  <button type="button" class="aqua-button" data-action="click->menu#toggle">
+  <button type="button" class="header-button p-2" data-action="click->menu#toggle">
     <i class="fa-solid fa-bars fa-lg relative -bottom-px"></i>
   </button>
   
   <nav class="nav_left" data-menu-target="panel" data-action="click->menu#close">
+    <%= image_tag "logo_01.png", class: "object-contain w-full w-1/3 m-auto hidden md:inline-block" %>
     <div class="nav_right" data-action="click->menu#stop">
       <button type="button"
         class="close-button"
@@ -16,7 +18,7 @@
         <i class="fa-solid fa-xmark fa-lg relative -bottom-px"></i>
       </button>
       <div class="nav-menu">
-        <ul class="main-font line-link text-xl sm:text-2xl">
+        <ul class="main-font line-link text-xl sm:text-2xl mb-6">
           <% if logged_in? %>
             <% menu_items = [
               { icon: "fa-solid fa-fish-fins", label_key: "header.top", path: root_path },
@@ -45,7 +47,7 @@
 
           <% menu_items.each do |item| %>
             <% next if current_page?(item[:path]) %>
-            <li  class="mb-1.5">
+            <li class="mb-1.5">
               <% if item[:method] %>
                 <%= link_to item[:path], data: { turbo_method: item[:method] } do %>
                   <i class="<%= item[:icon] %> mr-2"></i><%= t(item[:label_key]) %>
@@ -58,8 +60,8 @@
             </li>
           <% end %>
         </ul>
-        <p class="mt-10">ロゴ画像</p>
-        <p class="mt-5 text-xs">© 2025 DAYDREAM AQUARIUM</p>
+        <%= image_tag('logo_02.png') %>
+        <p class="mt-1 text-xs">© 2025 DAYDREAM AQUARIUM</p>
         <div class="flex mt-3">
           <a href="#"><i class="fa-brands fa-square-x-twitter fa-2x"></i></a>
           <a href="#"><i class="fa-brands fa-github fa-2x"></i></a>

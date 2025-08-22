@@ -2,7 +2,7 @@ class CreaturesController < ApplicationController
   skip_before_action :require_login, only: [:show]
 
   def index
-    @creatures = current_user.creatures.order(created_at: :desc)
+    @creatures = current_user.creatures.order(created_at: :desc).page(params[:page])
   end
 
   def new
