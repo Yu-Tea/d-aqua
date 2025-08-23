@@ -1,0 +1,39 @@
+ja:
+  activerecord:
+    models:
+      user: ユーザー
+      creature: 生き物
+    attributes:
+      user:
+        email: メールアドレス
+        name: ユーザー名
+        password: パスワード
+        password_confirmation: パスワード確認
+      creature:
+        name: 名前
+        description: 説明文
+        movement: 動き
+        swim: すいすい
+        float: ぷかぷか
+        rest: もぞもぞ
+        size: サイズ
+        small: 小さい
+        medium: 普通
+        large: 大きい
+  enums:
+    creature:
+      movement:
+        swim: すいすい
+        float: ぷかぷか
+        rest: もぞもぞ
+      size:
+        small: 小
+        medium: 中
+        large: 大
+  views:
+    pagination:
+      first: <i class="fas fa-angle-double-left"></i>
+      last: <i class="fas fa-angle-double-right"></i>
+      previous: <i class="fas fa-angle-left"></i>
+      next: <i class="fas fa-angle-right"></i>
+      truncate: "..."

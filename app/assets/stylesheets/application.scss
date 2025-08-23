@@ -1,0 +1,78 @@
+// app/assets/stylesheets/application.scss
+@import "application.tailwind";
+@import "top";
+@import "creature";
+
+body {
+  font-family: "Noto Sans JP", "メイリオ", "Meiryo", "ヒラギノ角ゴ ProN W3",
+    "Hiragino Kaku Gothic ProN", "ＭＳ ゴシック", sans-serif;
+  margin: 0;
+  background: url("bg_floor.png"), url("bg_sea.png");
+  background-repeat: no-repeat, no-repeat;
+  background-position: right bottom, left top;
+  background-attachment: fixed, fixed;
+  background-size: cover, cover;
+  color: #333;
+}
+
+.main-font {
+  font-family: "Kaisei Opti", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.main-color {
+  color: #1d71b8;
+}
+
+/* 光の画像の設定 */
+.bg-light {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("bg_light.png") left top no-repeat;
+  background-size: cover;
+  opacity: 0.3;
+  animation: lightPulse 4s ease-in-out infinite;
+  pointer-events: none;
+  z-index: -10;
+}
+
+@keyframes lightPulse {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+h1 {
+  font-family: "Kaisei Opti", serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #1d71b8;
+  font-size: 2rem;
+  margin-bottom: 0.6rem;
+}
+
+h2 {
+  font-family: "Kaisei Opti", serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #1d71b8;
+  text-align: center;
+  font-size: 1.8rem;
+}
+
+a {
+  color: #1b89ce;
+
+  &:hover {
+    color: #3ebde7;
+    text-decoration: none;
+  }
+}

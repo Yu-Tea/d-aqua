@@ -1,0 +1,19 @@
+<% content_for(:title, t('.title')) %>
+<div class="container mx-auto h-screen">
+  <div class="bg_subpage">
+    <div class="mx-auto px-8 w-full max-w-lg">
+      <h1><%= t('.title') %></h1>
+      <%= link_to t('defaults.edit'), edit_profile_path, class: 'aqua-button' %>
+      <table class="table">
+        <tr>
+          <th scope="row"><%= User.human_attribute_name(:email) %></th>
+          <td><%= current_user.email %></td>
+        </tr>
+        <tr>
+          <th scope="row"><%= User.human_attribute_name(:name) %></th>
+          <td><%= current_user.name %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

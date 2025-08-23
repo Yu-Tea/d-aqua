@@ -1,0 +1,8 @@
+<% flash.each do |message_type, message| %>
+  <div class="<%= flash_background_color(message_type) %> flash-message px-4 py-2 rounded-full text-white border border-2 border-white mr-auto cursor-pointer" 
+    data-controller="flash"
+    data-action="click->flash#dismiss">
+    <%= message %>
+    <button class="ml-2 text-lg leading-none" data-action="click->flash#dismiss">&times;</button>
+  </div>
+<% end %>

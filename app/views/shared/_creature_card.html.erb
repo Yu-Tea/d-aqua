@@ -1,0 +1,24 @@
+<%
+  movement_labels = {
+    'swim' => '泳',
+    'float' => '漂',
+    'rest' => '底'
+  }
+%>
+
+<%= link_to creature_path(creature), class: "text-xl lg:text-2xl flex-auto text-left" do %>
+  <div class="bg-white flex items-center p-3 rounded-xl gap-1 hover:bg-opacity-70">
+    <div class="creture-image mr-1">
+      <%= raw creature.svg_content %>
+    </div>
+    <div class="flex-auto main-font mr-2">
+        <%= creature.name %>
+    </div>
+    <div class="type-box m-bg-color text-sm">
+      <%= movement_labels[creature.movement] %>
+    </div>
+    <div class="type-box s-bg-color text-sm">
+      <%= creature.size_i18n %>
+    </div>
+  </div>
+<% end %>

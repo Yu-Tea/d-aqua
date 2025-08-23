@@ -1,0 +1,54 @@
+<div class="container mx-auto h-screen">
+  <div class="bg_subpage">
+    <div class="mx-auto text-center">
+      <div class="bg-white p-4 sm:px-11 sm:py-8 rounded-xl mb-6 max-w-lg">
+        <h2 class="text-2xl sm:text-4xl mb-1 "><%= @creature.name %></h2>
+        <p>制作者：<%= @creature.user.name %></p>
+        <% if current_user.own?(@creature) %>
+          <div class="flex items-center justify-end gap-1">
+            <%= link_to "#" do %>
+              <i class="fa-solid fa-pencil"></i>
+            <% end %>
+            <%= link_to creature_path(@creature), id: "button-delete-#{@creature.id}", data: { turbo_method: :delete, turbo_confirm: t('defaults.delete_confirm') } do %>
+              <i class="fa-solid fa-trash-can"></i>
+            <% end %>
+          </div>
+        <% end %>
+        <div class="creature-bg mt-2 mb-4">
+          <%= raw @creature.svg_content %>
+        </div>
+
+        <div class="flex flex-col sm:flex-row  justify-center items-center gap-2 text-white text-sm mb-5">
+          <div class="m-bg-color px-4 py-1.5 rounded-full">動きタイプ：<%= @creature.movement_i18n %></div>
+          <div class="s-bg-color px-4 py-1.5 rounded-full">サイズ：<%= @creature.size_i18n %></div>
+        </div>
+        <div class="text-center mx-auto block mb-5">
+          <div class="text-left inline-block">
+            <%= simple_format(@creature.description) %>
+          </div>
+        </div>
+        <%= link_to "#", class:"aqua-button" do %>
+          <i class="fa-brands fa-x-twitter"></i><span class="font-bold">に投稿</span>
+        <% end %>
+      </div>
+      <% if logged_in? %>
+        <div>
+        <%= link_to "#", onclick: "history.back(); return false;", method: :get do %>
+          <i class="fa-solid fa-angles-left"></i><span class="font-bold">戻る</span>
+        <% end %>
+        <span class="main-color">|</span>
+        <%= link_to root_path do %>
+          <i class="fa-solid fa-fish-fins"></i><span class="font-bold">アクアリウム</span>
+        <% end %>
+      </div>
+      <% else %>
+      <div class="text-lg">
+        <%= link_to root_path do %>
+          <i class="fa-solid fa-fish-fins"></i><span class="font-bold">アクアリウム</span>
+        <% end %>
+      </div>
+      <% end %>
+      
+    </div>
+  </div>
+</div>

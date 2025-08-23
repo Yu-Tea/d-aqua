@@ -1,0 +1,308 @@
+// 生き物 一覧用
+.creture-image {
+  width: 54px;
+  height: 54px;
+  padding: 7px;
+  background: url("card_img_bg.png") center center no-repeat;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+}
+
+// newページ用
+.draw-box {
+  svg {
+    background-color: #5a8bbc;
+    cursor: crosshair;
+  }
+}
+
+//showページ用
+.creature-bg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background: url("show_img_bg.png") center center no-repeat;
+  padding: 20px;
+  border-radius: 15px;
+
+  svg {
+    width: 60% !important;
+    height: 60% !important;
+    display: block;
+  }
+}
+
+// 動き＆サイズの表示調整
+.type-box {
+  min-width: 26px;
+  min-height: 26px;
+  color: #fff;
+  border-radius: 5px;
+  text-align: center;
+  line-height: 26px;
+  border: none;
+}
+
+.m-bg-color {
+  background-color: #4db1e1;
+}
+
+.s-bg-color {
+  background-color: #4b99d3;
+}
+
+/* 生き物が泳ぐ用の調整 */
+.ocean-container {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 104px);
+  top: 104px;
+  overflow: hidden;
+}
+
+.creatures-area {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; // 背景はクリックできないように
+  z-index: 1;
+}
+
+// 生き物の基本スタイル
+.creature {
+  position: absolute;
+  cursor: pointer;
+  pointer-events: auto; // 生き物はクリック可能
+  transition: transform 0.3s ease;
+  z-index: 10;
+
+  &:hover {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+  }
+
+  svg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+// 動き＆サイズの大きさ調整
+.creature-swim-small {
+  width: 40px;
+  height: 40px;
+}
+
+.creature-swim-medium {
+  width: 100px;
+  height: 100px;
+}
+
+.creature-swim-large {
+  width: 180px;
+  height: 180px;
+}
+
+.creature-float-small {
+  width: 30px;
+  height: 30px;
+}
+
+.creature-float-medium {
+  width: 60px;
+  height: 60px;
+}
+
+.creature-float-large {
+  width: 90px;
+  height: 90px;
+}
+
+.creature-rest-small {
+  width: 30px;
+  height: 30px;
+}
+
+.creature-rest-medium {
+  width: 45px;
+  height: 45px;
+}
+
+.creature-rest-large {
+  width: 55px;
+  height: 55px;
+}
+
+// swim3パターンのアニメーション
+@keyframes swim-gentle-motion {
+  0% {
+    transform: translateX(0) translateY(0) scaleX(1);
+  }
+  40% {
+    transform: translateX(-700px) translateY(-10px) scaleX(1);
+  }
+  50% {
+    transform: translateX(-700px) translateY(-10px) scaleX(-1); /* 向き変更 */
+  }
+  90% {
+    transform: translateX(0) translateY(0) scaleX(-1);
+  }
+  100% {
+    transform: translateX(0) translateY(0) scaleX(1); /* 向き変更 */
+  }
+}
+
+@keyframes swim-active-motion {
+  0% {
+    transform: translateX(0) translateY(0) scaleX(1);
+  }
+  30% {
+    transform: translateX(-1200px) translateY(-10px) scaleX(1);
+  }
+  40% {
+    transform: translateX(-1200px) translateY(-10px) scaleX(-1); /* 向き変更 */
+  }
+  50% {
+    transform: translateX(-1200px) translateY(-10px) scaleX(-1);
+  }
+  80% {
+    transform: translateX(0) translateY(0) scaleX(-1);
+  }
+  90% {
+    transform: translateX(0) translateY(0) scaleX(1); /* 向き変更 */
+  }
+  100% {
+    transform: translateX(0) translateY(0) scaleX(1);
+  }
+}
+
+@keyframes swim-lazy-motion {
+  0% {
+    transform: translateX(0) translateY(0) scaleX(1);
+  }
+  20% {
+    transform: translateX(-200px) translateY(-30px) scaleX(1);
+  }
+  40% {
+    transform: translateX(-400px) translateY(0px) scaleX(1);
+  }
+  50% {
+    transform: translateX(-400px) translateY(0px) scaleX(-1); /* 向き変更 */
+  }
+  70% {
+    transform: translateX(-200px) translateY(20px) scaleX(-1); /* 向き変更 */
+  }
+  90% {
+    transform: translateX(0) translateY(0) scaleX(-1);
+  }
+  100% {
+    transform: translateX(0) translateY(0) scaleX(1); /* 向き変更 */
+  }
+}
+
+// floatパターンのアニメーション
+@keyframes float-anime {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  40% {
+    transform: translate(15px, 30px) rotate(10deg);
+  }
+
+  65% {
+    transform: translate(-5px, 20px) rotate(0deg);
+  }
+  85% {
+    transform: translate(8px, 10px) rotate(-10deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+}
+// restパターンのアニメーション
+@keyframes rest-anime {
+  0% {
+    transform: rotate(0deg);
+  }
+  47% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+  56% {
+    transform: rotate(-10deg);
+  }
+  59% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.swim-gentle {
+  animation: swim-gentle-motion 14s ease-in-out infinite;
+}
+
+.swim-active {
+  animation: swim-active-motion 6s ease-in-out infinite;
+}
+
+.swim-lazy {
+  animation: swim-lazy-motion 20s infinite;
+}
+
+.creature-float {
+  animation: float-anime 18.3s linear infinite;
+}
+
+.creature-rest {
+  animation: rest-anime 7.5s ease-in-out infinite;
+}
+
+// フェードイン・フェードアウト用
+.creature-fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+.creature-fade-out {
+  animation: fadeOut 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+}

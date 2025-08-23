@@ -1,1 +1,41 @@
-<h1 class="text-4xl text-green-700 font-semibold underline">Hello,world</h1>
+<div class="ocean-container" data-controller="ocean" >
+  <!-- 生き物が表示されるエリア -->
+  <div class="creatures-area" data-ocean-target="creaturesArea">
+    <!-- JavaScriptで動的に生成 -->
+  </div>
+  <!-- モーダルウィンドウ -->
+  <div id="creature-modal" class="modal" data-ocean-target="modal">
+    <div class="modal-content">
+      <span class="close" 
+            data-ocean-target="closeModal" 
+            data-action="click->ocean#closeModalClick">&times;</span>
+
+      
+      <div id="modal-body" data-ocean-target="modalBody">
+        <div class="creature-details">
+          <div class="creature-new">NEW!!</div>
+          <!-- SVG用のdiv -->
+          <div class="creature-image-container">
+            <div data-ocean-target="creatureSvg" 
+                 class="creature-image">
+            </div>
+          </div>
+
+          <div class="creature-info">
+            <h2 class="text-2xl sm:text-4lx" data-ocean-target="creatureName">生き物名</h2>
+            <p>制作者：<span data-ocean-target="creatureCreatorName">制作者名</span></p>
+            <div class="hidden sm:inline-block">
+              <div class="flex justify-center items-center gap-2 text-white text-sm my-3">
+                <div class="m-bg-color px-4 py-1.5 rounded-full">動きタイプ：<span data-ocean-target="creatureMovement">動き</span></div>
+                <div class="s-bg-color px-4 py-1.5 rounded-full">サイズ：<span data-ocean-target="creatureSize">サイズ</span></div>
+              </div>
+            </div>
+            <p data-ocean-target="creatureDescription" class="w-[260px] sm:w-[400px] line-clamp-4 my-2">生き物の説明</p>
+          </div>
+          <%= link_to "Xに投稿", "#", class: "aqua-button" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
