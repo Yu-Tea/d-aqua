@@ -2,8 +2,8 @@
 .creture-image {
   width: 54px;
   height: 54px;
-  padding: 10px;
-  background: #4d77a4;
+  padding: 7px;
+  background: url("card_img_bg.png") center center no-repeat;
   border-radius: 12px;
   overflow: hidden;
   display: flex;
@@ -33,10 +33,9 @@
   justify-content: center;
   position: relative;
   overflow: hidden;
-  background-color: #5a8bbc;
+  background: url("show_img_bg.png") center center no-repeat;
   padding: 20px;
   border-radius: 15px;
-  margin: 20px 0;
 
   svg {
     width: 60% !important;
@@ -45,11 +44,10 @@
   }
 }
 
-// お気に入り・チェックボタン調整
-.m-type {
+// 動き＆サイズの表示調整
+.type-box {
   min-width: 26px;
   min-height: 26px;
-  background-color: #78ade2;
   color: #fff;
   border-radius: 5px;
   text-align: center;
@@ -57,17 +55,13 @@
   border: none;
 }
 
-.s-type {
-  min-width: 26px;
-  min-height: 26px;
-  background-color: #5096dc;
-  color: #fff;
-  border-radius: 5px;
-  text-align: center;
-  line-height: 26px;
-  border: none;
+.m-bg-color {
+  background-color: #4db1e1;
 }
 
+.s-bg-color {
+  background-color: #4b99d3;
+}
 
 /* 生き物が泳ぐ用の調整 */
 .ocean-container {

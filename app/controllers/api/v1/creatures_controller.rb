@@ -1,23 +1,23 @@
 class Api::V1::CreaturesController < Api::V1::BaseController
-  skip_before_action :require_login, only: [:random, :show]
-  
+  skip_before_action :require_login, only: [ :random, :show ]
+
   def random
     # movementパラメータの処理を改善
-    movement_param = params[:movement] || ['swim', 'float', 'rest'].sample
+    movement_param = params[:movement] || [ "swim", "float", "rest" ].sample
     # enumの数値に変換
     movement_value = Creature.movements[movement_param]
-    
+
     # movement_valueがnilの場合（無効なパラメータ）の処理
     unless movement_value
-      render json: { error: 'Invalid movement parameter' }, status: 400
+      render json: { error: "Invalid movement parameter" }, status: 400
       return
     end
-    
+
     # ユーザー名を取得させる
     base_query = Creature.joins(:user)
-                      .select('creatures.*, users.name as creator_name')
+                      .select("creatures.*, users.name as creator_name")
                       .where(movement: movement_value)
-    
+
     # ログイン時のみ未発見優先ロジック
     creature = nil
     if current_user
@@ -49,14 +49,14 @@ class Api::V1::CreaturesController < Api::V1::BaseController
         can_discover: current_user.present? && !is_discovered # 発見可能かどうか
       }
     else
-      render json: { error: '生き物が見つかりませんでした' }, status: 404
+      render json: { error: "生き物が見つかりませんでした" }, status: 404
     end
   end
 
   # 生き物発見用のエンドポイント
   def discover
     creature = Creature.find(params[:id])
-    
+
     book = current_user.books.find_or_create_by(creature: creature) do |new_book|
     end
 
@@ -67,17 +67,17 @@ class Api::V1::CreaturesController < Api::V1::BaseController
 
       if book.previously_new_record?
         # 発見成功
-        render json: { 
-        success: true, 
+        render json: {
+        success: true,
         is_new_discovery: true,
         # カウント情報を追加
         discovered_count: discovered_count,
-        total_creatures_count: total_creatures_count,
+        total_creatures_count: total_creatures_count
       }
       else
         # すでに発見済み
-        render json: { 
-        success: true, 
+        render json: {
+        success: true,
         is_new_discovery: false,
         # カウント情報を追加（変化なしでも一貫性のため）
         discovered_count: discovered_count,
@@ -85,23 +85,23 @@ class Api::V1::CreaturesController < Api::V1::BaseController
       }
       end
     else
-      render json: { success: false, error: book.errors.full_messages.join(', ') }
+      render json: { success: false, error: book.errors.full_messages.join(", ") }
     end
     rescue ActiveRecord::RecordNotFound
-      render json: { success: false, error: '生き物が見つかりません' }, status: 404
+      render json: { success: false, error: "生き物が見つかりません" }, status: 404
     rescue => e
-      render json: { success: false, error: '発見処理中にエラーが発生しました' }
+      render json: { success: false, error: "発見処理中にエラーが発生しました" }
   end
-  
+
   def show
     creature = Creature.joins(:user)
-                      .select('creatures.*, users.name as creator_name')
+                      .select("creatures.*, users.name as creator_name")
                       .find(params[:id])
-    
+
     # SVG処理
     svg_content = get_svg_content(creature)
     is_discovered = current_user ? current_user.discovered?(creature) : false
-    
+
     render json: {
       id: creature.id,
       name: creature.name,

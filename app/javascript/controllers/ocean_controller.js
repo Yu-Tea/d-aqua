@@ -14,6 +14,8 @@ export default class extends Controller {
     "creatureDescription",
     "creatureSvg",
     "creatureCreatorName",
+    "creatureMovement",
+    "creatureSize",
   ];
 
   connect() {
@@ -138,6 +140,19 @@ export default class extends Controller {
     ];
   }
 
+  // 動きとサイズの表記変換テーブル
+  movementTranslations = {
+    swim: "すいすい",
+    float: "ぷかぷか",
+    rest: "もぞもぞ",
+  };
+
+  sizeTranslations = {
+    small: "小",
+    medium: "中",
+    large: "大",
+  };
+
   // 生き物のクリックイベント
   showCreature(event) {
     const element = event.currentTarget;
@@ -168,10 +183,16 @@ export default class extends Controller {
       this.creatureNameTarget.textContent = creatureData.name;
     if (this.hasCreatureDescriptionTarget)
       this.creatureDescriptionTarget.textContent = creatureData.description;
-    if (this.hasCreatureCreatorNameTarget)
-      this.creatureCreatorNameTarget.textContent = creatureData.creator_name;
     if (this.hasCreatureSvgTarget && creatureData.svg_content)
       this.creatureSvgTarget.innerHTML = creatureData.svg_content;
+    // 🌟 動きとサイズは変換テーブルを使用して日本語を渡す
+    if (this.hasCreatureMovementTarget)
+      this.creatureMovementTarget.textContent =
+        this.movementTranslations[creatureData.movement] ||
+        creatureData.movement;
+    if (this.hasCreatureSizeTarget)
+      this.creatureSizeTarget.textContent =
+        this.sizeTranslations[creatureData.size] || creatureData.size;
 
     this.openModal();
   }

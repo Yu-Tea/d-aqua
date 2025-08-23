@@ -61,6 +61,6 @@ gem "tailwindcss-ruby", "3.4.17"
 
 gem "sassc-rails"
 gem "sorcery"
-gem 'rails-i18n', '~> 7.0.0'
-gem 'enum_help'
-gem 'kaminari'
+gem "rails-i18n", "~> 7.0.0"
+gem "enum_help"
+gem "kaminari"

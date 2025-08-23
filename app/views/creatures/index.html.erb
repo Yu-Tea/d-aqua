@@ -3,11 +3,11 @@
   <div class="bg_subpage">
     <div class="mx-auto px-8 lg:px-24 w-full text-center">
       <h1><%= t('.title') %></h1>
-      <p>生き物をソウゾウしてアクアリウムで泳がせよう。</p>
+      <p>イキモノをソウゾウしてアクアリウムで泳がせよう。</p>
       <%= link_to "ソウゾウする", new_creature_path, class: "aqua-button" %>
       <% if @creatures.present? %>
-        <p>アナタがソウゾウした生き物の一覧です。</p>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-8 my-6">
+        <h2 class="text-2xl mt-5">アナタがソウゾウしたイキモノ</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 my-6">
           <% @creatures.each do |creature| %>
             <%= render 'shared/creature_card', creature: creature %>
           <% end %>

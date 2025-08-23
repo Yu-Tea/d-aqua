@@ -4,9 +4,9 @@
     <div class="mx-auto px-8 lg:px-24 w-full text-center">
       <h1><%= t('.title') %></h1>
       <p>アナタが見つけたイキモノの数：<%= @discovered_count %>/<%= @total_creatures_count %></p>
-      <%= link_to root_path do %>
-        <i class="fa-solid fa-fish-fins"></i>アクアリウムに戻る
-      <% end %>
+        <%= link_to root_path, class: "mt-2" do %>
+          <i class="fa-solid fa-fish-fins"></i><span class="font-bold">アクアリウムに戻る</span>
+        <% end %>
       <% if @books.present? %>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 my-6">
           <% @books.each do |book| %>
