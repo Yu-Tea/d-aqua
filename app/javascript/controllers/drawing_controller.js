@@ -13,7 +13,6 @@ export default class extends Controller {
     // SVG要素の設定
     this.canvasTarget.setAttribute("xmlns", "http://www.w3.org/2000/svg");
 
-    // イベントリスナーの設定
     this.canvasTarget.addEventListener(
       "mousedown",
       this.startDrawing.bind(this)

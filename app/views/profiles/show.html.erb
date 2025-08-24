@@ -1,19 +1,24 @@
 <% content_for(:title, t('.title')) %>
 <div class="container mx-auto h-screen">
   <div class="bg_subpage">
-    <div class="mx-auto px-8 w-full max-w-lg">
+    <div class="mx-auto text-center">
       <h1><%= t('.title') %></h1>
-      <%= link_to t('defaults.edit'), edit_profile_path, class: 'aqua-button' %>
-      <table class="table">
-        <tr>
-          <th scope="row"><%= User.human_attribute_name(:email) %></th>
-          <td><%= current_user.email %></td>
-        </tr>
-        <tr>
-          <th scope="row"><%= User.human_attribute_name(:name) %></th>
-          <td><%= current_user.name %></td>
-        </tr>
-      </table>
+      <p>アナタのお名前は制作したイキモノのページで公開されます。</p>
+      <div class="mx-auto flex items-center justify-center">
+        <table class="table text-left my-8">
+          <tr>
+            <th scope="row"><%= User.human_attribute_name(:email) %></th>
+            <td>：<%= current_user.email %></td>
+          </tr>
+          <tr>
+            <th scope="row"><%= User.human_attribute_name(:name) %></th>
+            <td>：<%= current_user.name %></td>
+          </tr>
+        </table>
+      </div>
+      <%= link_to edit_profile_path, class: 'aqua-button' do %>
+        <i class="fa-solid fa-pencil mr-1"></i>編集する
+      <% end %>
     </div>
   </div>
 </div>

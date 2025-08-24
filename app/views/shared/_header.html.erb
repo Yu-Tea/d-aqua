@@ -64,8 +64,12 @@
         <%= image_tag('logo_02.png') %>
         <p class="mt-1 text-xs">© 2025 DAYDREAM AQUARIUM</p>
         <div class="flex mt-3">
-          <a href="#"><i class="fa-brands fa-square-x-twitter fa-2x"></i></a>
-          <a href="#"><i class="fa-brands fa-github fa-2x"></i></a>
+          <%= link_to "https://x.com/Yu_Tea_68", target: :_blank do %>
+            <i class="fa-brands fa-square-x-twitter fa-2x"></i>
+          <% end %>
+          <%= link_to "https://github.com/Yu-Tea/d-aqua", target: :_blank do %>
+            <i class="fa-brands fa-github fa-2x"></i>
+          <% end %>
         </div>
       </div>
     </div>

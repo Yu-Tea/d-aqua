@@ -4,7 +4,7 @@
 @import "creature";
 
 body {
-  font-family: "メイリオ", "Meiryo", "Noto Sans JP",  "ヒラギノ角ゴ ProN W3",
+  font-family: "メイリオ", "Meiryo", "Noto Sans JP", "ヒラギノ角ゴ ProN W3",
     "Hiragino Kaku Gothic ProN", "ＭＳ ゴシック", sans-serif;
   margin: 0;
   background: url("bg_floor.png"), url("bg_sea.png");
@@ -19,10 +19,6 @@ body {
   font-family: "Kaisei Opti", serif;
   font-weight: 400;
   font-style: normal;
-}
-
-.main-color {
-  color: #1d71b8;
 }
 
 /* 光の画像の設定 */
@@ -66,6 +62,18 @@ h2 {
   color: #1d71b8;
   text-align: center;
   font-size: 1.8rem;
+}
+
+h3 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 2rem 0 1rem;
+  color: #1d71b8;
+  border-bottom: solid 1px #1d71b8;
+}
+
+.main-color {
+  color: #1d71b8;
 }
 
 a {

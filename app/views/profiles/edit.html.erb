@@ -1,23 +1,21 @@
 <% content_for(:title, t('.title')) %>
 <div class="container mx-auto h-screen">
   <div class="bg_subpage">
-    <div class="mx-auto px-8 w-full max-w-lg">
+    <div class="text-center mx-5 sm:mx-auto max-w-sm">
       <h1><%= t('.title') %></h1>
       <%= form_with model: @user, url: profile_path, method: :put do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
-        <div class="mb-3">
-          <%= f.label :email, class: "form-label" %>
-          <%= f.email_field :email, class: "form-control" %>
+        <div class="mt-8 mb-3 text-left">
+          <%= f.label :email, class: "block font-bold main-color mb-1" %>
+          <%= f.email_field :email, class: "appearance-none border rounded-md w-full py-2 px-4 text-gray-700 leading-tight focus:border-blue-400 focus:outline-none" %>
         </div>
-        <div class="mb-3">
-          <%= f.label :name, class: "form-label" %>
-          <%= f.text_field :name, class: "form-control" %>
+        <div class="mb-3 text-left">
+          <%= f.label :name, class: "block font-bold main-color mb-1" %>
+          <%= f.text_field :name, class: "appearance-none border rounded-md w-full py-2 px-4 text-gray-700 leading-tight focus:border-blue-400 focus:outline-none" %>
         </div>
-        <%= f.submit class: "aqua-button" %>
+        <button type="submit" class="aqua-button my-3"><i class="fa-solid fa-pencil mr-1"></i>更新する</button>
       <% end %>
-      <div class='text-center'>
-        <%= link_to t('.to_login_page'), login_path %>
-      </div>
+      <%= link_to t('.to_login_page'), login_path %>
     </div>
   </div>
 </div>

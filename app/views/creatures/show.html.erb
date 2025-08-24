@@ -1,7 +1,7 @@
 <div class="container mx-auto h-screen">
   <div class="bg_subpage">
     <div class="mx-auto text-center">
-      <div class="bg-white p-4 sm:px-10 sm:py-8 rounded-xl mb-6 max-w-md mx-5">
+      <div class="bg-white p-4 sm:px-10 sm:py-8 rounded-xl mb-6 max-w-md mx-5 sm:mx-auto">
         <h2 class="text-2xl sm:text-4xl mb-1 "><%= @creature.name %></h2>
         <p>制作者：<%= @creature.user.name %></p>
         <% if current_user.own?(@creature) %>
