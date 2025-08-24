@@ -1,26 +1,20 @@
 <div class="ocean-container" data-controller="ocean" >
   <!-- 生き物が表示されるエリア -->
-  <div class="creatures-area" data-ocean-target="creaturesArea">
-    <!-- JavaScriptで動的に生成 -->
-  </div>
+  <div class="creatures-area" data-ocean-target="creaturesArea"></div>
   <!-- モーダルウィンドウ -->
   <div id="creature-modal" class="modal" data-ocean-target="modal">
     <div class="modal-content">
       <span class="close" 
             data-ocean-target="closeModal" 
             data-action="click->ocean#closeModalClick">&times;</span>
-
       
       <div id="modal-body" data-ocean-target="modalBody">
         <div class="creature-details">
           <div class="creature-new">NEW!!</div>
           <!-- SVG用のdiv -->
           <div class="creature-image-container">
-            <div data-ocean-target="creatureSvg" 
-                 class="creature-image">
-            </div>
+            <div data-ocean-target="creatureSvg" class="creature-image"></div>
           </div>
-
           <div class="creature-info">
             <h2 class="text-2xl sm:text-4lx" data-ocean-target="creatureName">生き物名</h2>
             <p>制作者：<span data-ocean-target="creatureCreatorName">制作者名</span></p>

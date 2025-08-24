@@ -21,13 +21,17 @@
 // newページ用
 .draw-box {
   svg {
-    background-color: #5a8bbc;
+    background: url("show_img_bg.png") center center no-repeat;
     cursor: crosshair;
+    margin: auto;
   }
 }
 
 //showページ用
 .creature-bg {
+  max-width: 424px;
+  height: auto;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -38,8 +42,8 @@
   border-radius: 15px;
 
   svg {
-    width: 60% !important;
-    height: 60% !important;
+    width: 70% !important;
+    height: 70% !important;
     display: block;
   }
 }
