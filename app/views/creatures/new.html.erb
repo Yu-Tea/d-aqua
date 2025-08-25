@@ -26,49 +26,15 @@
             <i class="fa-solid fa-trash-can"></i>すべて消す
           </button>
         </div>
-        <div class="text-left flex-1 min-w-0">
-          <div class="mb-4">
-          <div class="flex items-center gap-1.5 mb-1">
-            <%= f.label :name, class: "block font-bold main-color" %>
-            <span class=" text-gray-600 text-sm">※最大10文字</span>
-          </div>
-          <%= f.text_field :name, maxlength: 10, class: "appearance-none border rounded-md w-full py-2 px-4 text-gray-700 leading-tight focus:border-blue-400 focus:outline-none" %>
-          </div>
-
-          <div class="mb-4">
-          <div class="flex items-center gap-1.5 mb-1">
-            <%= f.label :description, class: "block font-bold main-color" %>
-            <span class=" text-gray-600 text-sm">※最大200文字</span>
-          </div>
-          <%= f.text_area :description, maxlength: 200, rows: "7", class: "appearance-none border rounded-md w-full py-2 px-4 text-gray-700 leading-tight focus:border-blue-400 focus:outline-none" %>
-          </div>
-
-          <div class="mb-4">
-          <%= f.label :movement, class: "block font-bold main-color mb-1" %>
-          <%= f.radio_button :movement, :swim, checked: true %>
-          <%= f.label :swim %>
-          <%= f.radio_button :movement, :float %>
-          <%= f.label :float %>
-          <%= f.radio_button :movement, :rest %>
-          <%= f.label :rest %>
-          </div>
-
-          <div class="mb-4">
-          <%= f.label :size, class: "block font-bold main-color mb-1" %>
-          <%= f.radio_button :size, :small %>
-          <%= f.label :small %>
-          <%= f.radio_button :size, :medium, checked: true %>
-          <%= f.label :medium %>
-          <%= f.radio_button :size, :large %>
-          <%= f.label :large %>
-          </div>
-        </div>
+        <%= render 'form', f: f %>
       </div>
       <button type="submit" class="aqua-button"><i class="fa-solid fa-pencil mr-1"></i>ソウゾウする</button>
       <% end %>
       <!-- 制作のヒント文章 -->
       <div class="mt-12 text-left border border-white px-5 sm:px-12 py-6 rounded-xl">
         <h2 class="text-2xl mb-4">制作のヒント</h2>
+        <p class="mt-4 main-color"><i class="fa-regular fa-lightbulb mr-1"></i>お絵かき</p>
+        <p>アクアリウムに放ちたいイキモノを自由に描いてください。ここで描いたイキモノは後の編集で変更できない点にご注意ください。（※その他の情報は編集で修正できます）</p>
         <p class="mt-4 main-color"><i class="fa-regular fa-lightbulb mr-1"></i>線の太さ</p>
         アクアリウムではイキモノは縮小して表示されるので、線が細めの印象になります。特にサイズ「小」を選択する場合は、細い線だとかすれて見辛くなる可能性があるので、太めの線で描くことをオススメします。
         <p class="mt-4 main-color"><i class="fa-regular fa-lightbulb mr-1"></i>動き「すいすい」</p>

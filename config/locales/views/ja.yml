@@ -15,7 +15,7 @@ ja:
       not_created: "%{item}を作成出来ませんでした"
       updated: "%{item}を更新しました"
       not_updated: "%{item}を更新出来ませんでした"
-      not_updated: "%{item}を更新出来ませんでした"
+      deleted: "%{item}を削除しました"
       require_login: ログインしてください
   header:
     register: ユーザー登録
@@ -50,6 +50,8 @@ ja:
       title: ソウゾウ
     new:
       title: ソウゾウタイム
+    edit:
+      title: イキモノ情報編集
   books:
     index:
       title: 図鑑

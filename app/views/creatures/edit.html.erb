@@ -1,0 +1,22 @@
+<% content_for(:title, t('.title')) %>
+<div class="container mx-auto h-screen">
+  <div class="bg_subpage">
+    <div class="text-center mx-5 sm:mx-20">
+      <h1><%= t('.title') %></h1>
+      <p>イキモノのイラストは修正できません。</p>
+      <%= form_with model: @creature do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+      <div class="flex flex-col lg:flex-row justify-center gap-8 mt-8 mb-2">
+        <div class="flex-shrink-0 w-full lg:w-auto" data-controller="drawing">
+          <div class="font-bold main-color text-left mb-1">イキモノ</div>
+          <div class="draw-box">
+            <%= raw @creature.svg_content %>
+          </div>
+        </div>
+        <%= render 'form', f: f %>
+      </div>
+      <button type="submit" class="aqua-button"><i class="fa-solid fa-pencil mr-1"></i>編集する</button>
+      <% end %>
+    </div>
+  </div>
+</div>

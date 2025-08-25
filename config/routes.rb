@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root "home#index"
   resources :users, only: %i[new create]
-  resources :creatures, only: %i[index new create show destroy]
+  resources :creatures, only: %i[index new create show edit update destroy]
   resources :books, only: %i[index]
   resource :profile, only: %i[show edit update]
 
@@ -20,7 +20,7 @@ Rails.application.routes.draw do
           get :random
         end
         member do
-          post :discover  # 🎯 生き物発見用のルート
+          post :discover
         end
       end
     end

@@ -23,6 +23,20 @@ class CreaturesController < ApplicationController
     end
   end
 
+  def edit
+  @creature = current_user.creatures.find_by_short_uuid(params[:id])
+  end
+
+  def update
+    @creature = current_user.creatures.find_by_short_uuid(params[:id])
+    if @creature.update(creature_params)
+      redirect_to creature_path(@creature), success: t('defaults.flash_message.updated', item: Creature.model_name.human)
+    else
+      flash.now[:danger] = t('defaults.flash_message.not_updated', item: Creature.model_name.human)
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   def destroy
     creature = current_user.creatures.find_by_short_uuid(params[:id])
     creature.destroy!
