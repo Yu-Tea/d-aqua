@@ -30,9 +30,9 @@ class CreaturesController < ApplicationController
   def update
     @creature = current_user.creatures.find_by_short_uuid(params[:id])
     if @creature.update(creature_params)
-      redirect_to creature_path(@creature), success: t('defaults.flash_message.updated', item: Creature.model_name.human)
+      redirect_to creature_path(@creature), success: t("defaults.flash_message.updated", item: Creature.model_name.human)
     else
-      flash.now[:danger] = t('defaults.flash_message.not_updated', item: Creature.model_name.human)
+      flash.now[:danger] = t("defaults.flash_message.not_updated", item: Creature.model_name.human)
       render :edit, status: :unprocessable_entity
     end
   end

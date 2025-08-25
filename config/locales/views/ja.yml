@@ -10,6 +10,7 @@ ja:
   defaults:
     edit: 編集
     delete_confirm: 削除しますか？
+    password_reset: パスワードリセット
     flash_message:
       created: "%{item}を作成しました"
       not_created: "%{item}を作成出来ませんでした"
@@ -67,3 +68,13 @@ ja:
       title: 利用規約
     privacy:
       title: プライバシーポリシー
+  password_resets:
+    new:
+      title: パスワードリセット申請
+      submit: 送信
+    edit:
+      title: パスワードリセット
+    create:
+      success: パスワードリセット手順を送信しました
+    update:
+      success: パスワードを変更しました

@@ -4,22 +4,22 @@
     <div class="text-center mx-5 sm:mx-10">
       <div class="text-center mx-auto max-w-sm">
         <h1><%= t('.title') %></h1>
-        <%= form_with url: login_path do |f| %>
+        <%= form_with model: @user, url: password_reset_path(@token), method: :patch do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
           <div class="mt-8 mb-3 text-left">
             <%= f.label :email, class: "block font-bold main-color mb-1" %>
-            <%= f.email_field :email, class: "appearance-none border rounded-md w-full py-2 px-4 text-gray-700 leading-tight focus:border-blue-400 focus:outline-none" %>
+            <%= @user.email %>
           </div>
-          <div class="mb-3 text-left">
+          <div class="mt-8 mb-3 text-left">
             <%= f.label :password, class: "block font-bold main-color mb-1" %>
             <%= f.password_field :password, class: "appearance-none border rounded-md w-full py-2 px-4 text-gray-700 leading-tight focus:border-blue-400 focus:outline-none" %>
           </div>
-          <button type="submit" class="aqua-button my-3"><i class="fa-solid fa-right-to-bracket mr-1"></i>ログイン</button>
+          <div class="mt-8 mb-3 text-left">
+            <%= f.label :password_confirmation, class: "block font-bold main-color mb-1" %>
+            <%= f.password_field :password_confirmation, class: "appearance-none border rounded-md w-full py-2 px-4 text-gray-700 leading-tight focus:border-blue-400 focus:outline-none" %>
+          </div>
+          <button type="submit" class="aqua-button my-3"><i class="fa-solid fa-arrow-rotate-right mr-1"></i>更新</button>
         <% end %>
-        <div class='text-center'>
-          <%= link_to t('.to_register_page'), new_user_path %>
-          <span class="main-color">|</span>
-          <%= link_to t('.password_forget'), new_password_reset_path %>
-        </div>
       </div>
     </div>
   </div>
