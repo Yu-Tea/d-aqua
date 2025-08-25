@@ -183,6 +183,8 @@ export default class extends Controller {
       this.creatureNameTarget.textContent = creatureData.name;
     if (this.hasCreatureDescriptionTarget)
       this.creatureDescriptionTarget.textContent = creatureData.description;
+    if (this.hasCreatureCreatorNameTarget)
+      this.creatureCreatorNameTarget.textContent = creatureData.creator_name;
     if (this.hasCreatureSvgTarget && creatureData.svg_content)
       this.creatureSvgTarget.innerHTML = creatureData.svg_content;
     // 🌟 動きとサイズは変換テーブルを使用して日本語を渡す

@@ -1,0 +1,37 @@
+<div class="text-left flex-1 min-w-0">
+  <div class="mb-4">
+  <div class="flex items-center gap-1.5 mb-1">
+    <%= f.label :name, class: "block font-bold main-color" %>
+    <span class=" text-gray-600 text-sm">※最大10文字</span>
+  </div>
+  <%= f.text_field :name, maxlength: 10, class: "appearance-none border rounded-md w-full py-2 px-4 text-gray-700 leading-tight focus:border-blue-400 focus:outline-none" %>
+  </div>
+
+   <div class="mb-4">
+  <div class="flex items-center gap-1.5 mb-1">
+    <%= f.label :description, class: "block font-bold main-color" %>
+    <span class=" text-gray-600 text-sm">※最大200文字</span>
+  </div>
+  <%= f.text_area :description, maxlength: 200, rows: "7", class: "appearance-none border rounded-md w-full py-2 px-4 text-gray-700 leading-tight focus:border-blue-400 focus:outline-none" %>
+  </div>
+
+   <div class="mb-4">
+  <%= f.label :movement, class: "block font-bold main-color mb-1" %>
+  <%= f.radio_button :movement, :swim, checked: true %>
+  <%= f.label :swim %>
+  <%= f.radio_button :movement, :float %>
+  <%= f.label :float %>
+  <%= f.radio_button :movement, :rest %>
+  <%= f.label :rest %>
+  </div>
+
+   <div class="mb-4">
+  <%= f.label :size, class: "block font-bold main-color mb-1" %>
+  <%= f.radio_button :size, :small %>
+  <%= f.label :small %>
+  <%= f.radio_button :size, :medium, checked: true %>
+  <%= f.label :medium %>
+  <%= f.radio_button :size, :large %>
+  <%= f.label :large %>
+  </div>
+</div>

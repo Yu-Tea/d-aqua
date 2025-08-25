@@ -15,6 +15,11 @@
 }
 
 /* メインボタン */
+button.aqua-button {
+  border: none;
+  appearance: none;
+}
+
 .aqua-button {
   position: relative; /* static以外を指定 */
   z-index: 0; /* グラデーションよりも上に配置 */
@@ -59,6 +64,18 @@
   opacity: 0;
 }
 
+/* 白ボタン */
+.white-button {
+  background-color: #fff;
+  color: #1b89ce;
+  border-radius: 6px;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #3ebde7;
+  }
+}
+
 /* メニュー用の設定 */
 .nav_left {
   background-color: rgba(236, 240, 244, 0.6);
@@ -77,13 +94,11 @@
   -webkit-backdrop-filter: blur(8px);
 }
 
-/* 背景フェードイン */
 .nav_left.active {
   opacity: 1;
   pointer-events: auto;
 }
 
-/* 右側メニュー本体 */
 .nav_right {
   background-color: #fff;
   width: 100%;
@@ -91,7 +106,7 @@
   transform: translateX(100%);
   transition: transform 0.4s ease;
   padding: 30px;
-  color: #97cae1;
+  color: #a1d1e6;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -99,7 +114,6 @@
   z-index: 10;
 }
 
-/* スライドイン */
 .nav_left.active .nav_right {
   transform: translateX(0);
 }
@@ -169,8 +183,6 @@ nav ul {
   max-width: 100%;
   min-height: 100vh;
   margin: 0 auto;
-  display: flex;
-  justify-content: flex-end;
   z-index: 5;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
@@ -192,7 +204,7 @@ nav ul {
 .modal-content {
   background-color: #fefefe;
   margin: 12% auto;
-  padding: 20px;
+  padding: 10px 20px 20px;
   border-radius: 10px;
   width: 80%;
   max-width: 500px;
@@ -227,7 +239,7 @@ nav ul {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 10px 0;
+  margin-bottom: 10px;
 }
 
 .creature-image {
@@ -237,7 +249,7 @@ nav ul {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #4d77a4;
+  background: url("show_img_bg.png") center center no-repeat;
   overflow: hidden;
 }
 
@@ -257,11 +269,13 @@ nav ul {
 
 /* NEWマーク用 */
 .creature-new {
-  display: none;
   font-size: 1.5rem;
-  border-radius: 10px;
   font-weight: bold;
+  display: block;
+  min-height: 40px;
+  opacity: 0;
   animation: new-anime 2s ease-out infinite;
+  box-sizing: border-box;
 }
 
 @keyframes new-anime {
@@ -277,7 +291,9 @@ nav ul {
 }
 
 .creature-new.show {
-  display: block;
+  // display: block;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* フラッシュメッセージ */

@@ -2,11 +2,11 @@ ja:
   activerecord:
     models:
       user: ユーザー
-      creature: 生き物
+      creature: イキモノ
     attributes:
       user:
         email: メールアドレス
-        name: ユーザー名
+        name: アナタのお名前
         password: パスワード
         password_confirmation: パスワード確認
       creature:
@@ -17,9 +17,9 @@ ja:
         float: ぷかぷか
         rest: もぞもぞ
         size: サイズ
-        small: 小さい
-        medium: 普通
-        large: 大きい
+        small: 小
+        medium: 中
+        large: 大
   enums:
     creature:
       movement:
