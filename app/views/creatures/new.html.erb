@@ -9,7 +9,7 @@
       <%= render 'shared/error_messages', object: f.object %>
       <div class="flex flex-col lg:flex-row justify-center gap-8 mt-8 mb-2">
         <div class="flex-shrink-0 w-full lg:w-auto" data-controller="drawing">
-          <div class="font-bold main-color text-left mb-1">お絵かき</div>
+          <div class="font-bold main-color text-center lg:text-left mb-1">お絵かき</div>
           <div class="draw-box mb-2">
             <svg data-drawing-target="canvas" width="300px" height="300px" viewBox="0 0 300 300"></svg>
           </div>
@@ -20,7 +20,7 @@
       
           <%= f.hidden_field :svg_data, data: { drawing_target: "output" } %>
           <button type="button" class="white-button px-3 py-1" data-action="click->drawing#undo">
-            <i class="fa-solid fa-circle-arrow-left"></i>1つ戻る
+            <i class="fa-solid fa-circle-arrow-left mr-0.5"></i>1つ戻る
           </button>
           <button type="button" class="white-button px-3 py-1" data-action="click->drawing#clear">
             <i class="fa-solid fa-trash-can"></i>すべて消す

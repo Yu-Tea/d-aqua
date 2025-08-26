@@ -18,15 +18,15 @@
           <div class="creature-info">
             <h2 class="text-2xl sm:text-4lx" data-ocean-target="creatureName">生き物名</h2>
             <p>制作者：<span data-ocean-target="creatureCreatorName">制作者名</span></p>
-            <div class="hidden sm:inline-block">
-              <div class="flex justify-center items-center gap-2 text-white text-sm my-3">
-                <div class="m-bg-color px-4 py-1.5 rounded-full">動きタイプ：<span data-ocean-target="creatureMovement">動き</span></div>
-                <div class="s-bg-color px-4 py-1.5 rounded-full">サイズ：<span data-ocean-target="creatureSize">サイズ</span></div>
-              </div>
-            </div>
+            <div class="flex justify-center items-center gap-2 text-white text-sm my-3">
+              <div class="ms-box px-4 py-1.5 rounded-full">動き：<span data-ocean-target="creatureMovement">動き</span></div>
+              <div class="ms-box px-4 py-1.5 rounded-full">サイズ：<span data-ocean-target="creatureSize">サイズ</span></div>
+            </div>  
             <p data-ocean-target="creatureDescription" class="w-[260px] sm:w-[400px] line-clamp-4 my-2">生き物の説明</p>
           </div>
-          <%= link_to "Xに投稿", "#", class: "aqua-button" %>
+          <%= link_to "#", target: '_blank', class:"aqua-button", data: { ocean_target: "twitterButton" } do %>
+          <i class="fa-brands fa-x-twitter"></i><span class="font-bold">に投稿</span>
+        <% end %>
         </div>
       </div>
     </div>

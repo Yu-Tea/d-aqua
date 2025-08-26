@@ -1,8 +1,8 @@
 import { Controller } from "@hotwired/stimulus";
 
-const CREATURE_REMOVE_DELAY = 30000; // 生き物の削除までの時間
-const FADE_IN_DURATION = 500; // 生き物のフェードイン時間
-const FADE_OUT_DURATION = 500; // 生き物のフェードアウト時間
+const CREATURE_REMOVE_DELAY = 30000; // イキモノの削除までの時間
+const FADE_IN_DURATION = 500; // イキモノのフェードイン時間
+const FADE_OUT_DURATION = 500; // イキモノのフェードアウト時間
 
 export default class extends Controller {
   static targets = [
@@ -16,6 +16,7 @@ export default class extends Controller {
     "creatureCreatorName",
     "creatureMovement",
     "creatureSize",
+    "twitterButton",
   ];
 
   connect() {
@@ -27,14 +28,14 @@ export default class extends Controller {
     if (this.creatureInterval) clearInterval(this.creatureInterval);
   }
 
-  // 生き物の生成の開始
+  // イキモノの生成の開始
   startCreatureGeneration() {
     [0, 1, 2].forEach((index) => {
       setTimeout(() => {
         this.createCreature();
       }, index * 500); // 500msずつずらして最初の3匹生成
     });
-    this.creatureInterval = setInterval(() => this.createCreature(), 5100); // 生き物を生成する間隔
+    this.creatureInterval = setInterval(() => this.createCreature(), 5100); // イキモノを生成する間隔
   }
 
   async createCreature() {
@@ -44,13 +45,16 @@ export default class extends Controller {
         `/api/v1/creatures/random?movement=${movement}`
       );
       const creature = await response.json();
-      if (!creature.error) this.renderCreature(creature);
+      if (!creature.error) {
+        this.renderCreature(creature);
+        this.setupTwitterButton(creature.twitter_share_url);
+      }
     } catch (error) {
-      console.error("生き物の生成でエラー:", error);
+      console.error("イキモノの生成でエラー:", error);
     }
   }
 
-  // 生き物の要素を生成して表示
+  // イキモノの要素を生成して表示
   renderCreature(creature) {
     const creatureElement = document.createElement("div");
     creatureElement.className = `creature creature-${creature.movement}-${creature.size} creature-fade-in`;
@@ -92,7 +96,7 @@ export default class extends Controller {
     }, CREATURE_REMOVE_DELAY);
   }
 
-  // 生き物のデータ属性を設定
+  // イキモノのデータ属性を設定
   setCreatureDataAttributes(element, creature) {
     element.dataset.creatureId = creature.id;
     element.dataset.creatureName = creature.name;
@@ -102,6 +106,7 @@ export default class extends Controller {
     element.dataset.creatureSize = creature.size;
     element.dataset.creatureCreatorName = creature.creator_name;
     element.dataset.canDiscover = creature.can_discover.toString();
+    element.dataset.twitterShareUrl = creature.twitter_share_url || "";
   }
 
   applySvgStyle(element) {
@@ -113,7 +118,7 @@ export default class extends Controller {
     }
   }
 
-  // 生き物の位置をランダムに計算
+  // イキモノの位置をランダムに計算
   calculatePosition(movement) {
     const maxX = Math.max(window.innerWidth - 100, 100);
     const maxY = Math.max(window.innerHeight - 100, 100);
@@ -153,7 +158,7 @@ export default class extends Controller {
     large: "大",
   };
 
-  // 生き物のクリックイベント
+  // イキモノのクリックイベント
   showCreature(event) {
     const element = event.currentTarget;
 
@@ -166,6 +171,7 @@ export default class extends Controller {
       size: element.dataset.creatureSize,
       creator_name: element.dataset.creatureCreatorName,
       can_discover: element.dataset.canDiscover === "true",
+      twitter_share_url: element.dataset.twitterShareUrl,
     };
 
     // モーダルを表示
@@ -187,7 +193,8 @@ export default class extends Controller {
       this.creatureCreatorNameTarget.textContent = creatureData.creator_name;
     if (this.hasCreatureSvgTarget && creatureData.svg_content)
       this.creatureSvgTarget.innerHTML = creatureData.svg_content;
-    // 🌟 動きとサイズは変換テーブルを使用して日本語を渡す
+
+    // 動きとサイズは変換テーブルを使用して日本語を渡す
     if (this.hasCreatureMovementTarget)
       this.creatureMovementTarget.textContent =
         this.movementTranslations[creatureData.movement] ||
@@ -196,10 +203,14 @@ export default class extends Controller {
       this.creatureSizeTarget.textContent =
         this.sizeTranslations[creatureData.size] || creatureData.size;
 
+    if (creatureData.twitter_share_url) {
+      this.setupTwitterButton(creatureData.twitter_share_url);
+    }
+
     this.openModal();
   }
 
-  // 🎯 生き物発見のAPI呼び出し
+  // イキモノをクリックしたときの呼び出し
   async discoverCreature(creatureId) {
     try {
       const response = await fetch(`/api/v1/creatures/${creatureId}/discover`, {
@@ -216,22 +227,33 @@ export default class extends Controller {
 
       const data = await response.json();
 
+      // 🔥 発見時のTwitterボタン設定
+      if (data.creature_data && data.creature_data.twitter_share_url) {
+        this.setupTwitterButton(data.creature_data.twitter_share_url);
+      }
+
       if (data.success && data.is_new_discovery) {
         this.showNewDiscovery();
         // 新発見の場合、ヘッダーカウントを更新
         this.updateBookCount(data.discovered_count, data.total_creatures_count);
       }
     } catch (error) {
-      console.error("discoverCreature でエラーが発生しました:", error);
+      console.error("エラーが発生しました:", error);
     }
   }
 
-  // ヘッダーのブックカウント更新関数
+  // ヘッダーの図鑑カウント更新用
   updateBookCount(discoveredCount, totalCount) {
     const bookCountElement = document.querySelector("[data-book-count]");
     if (bookCountElement) {
       // カウント表示を更新
       bookCountElement.textContent = `図鑑：${discoveredCount}/${totalCount}`;
+    }
+  }
+
+  setupTwitterButton(twitterUrl) {
+    if (this.hasTwitterButtonTarget && twitterUrl) {
+      this.twitterButtonTarget.href = twitterUrl;
     }
   }
 
