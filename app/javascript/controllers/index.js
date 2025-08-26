@@ -18,3 +18,6 @@ application.register("ocean", OceanController);
 
 import FlashController from "./flash_controller";
 application.register("flash", FlashController);
+
+import LoadingController from "./loading_controller";
+application.register("loading",LoadingController);
