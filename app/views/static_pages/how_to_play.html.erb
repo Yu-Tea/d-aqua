@@ -1,9 +1,29 @@
 <% content_for(:title, t('.title')) %>
 <div class="container mx-auto h-screen">
   <div class="bg_subpage">
-    <div class="mx-auto px-8 w-full max-w-lg">
-      <h1>遊び方</h1>
-      <p>テスト文です。テスト文です。テスト文です。</p>
+    <div class="text-center mx-5 sm:mx-10">
+      <h1><%= t('.title') %></h1>
+      <div class="text-left mt-5 leading-relaxed static-page max-w-3xl mx-auto">
+        <p class="mt-2">DAYDREAM AQUARIUMは、アナタや誰かがソウゾウしたイキモノが住まう空想水族館です。</p>
+        <p class="mt-2">アクアリウムに現れるイキモノ達をぼんやり眺めたり、気になるイキモノがいたらクリックして名前を確認してみたり…ご自由にお過ごしください。
+        </p>
+        
+        <h3>ユーザー登録してログインすると出来ること</h3>
+        <div class="flex flex-col lg:flex-row gap-6 mt-8">
+          <%= image_tag "how_img_01.png", class: "object-contain w-full max-w-sm lg:w-1/3 mx-auto" %>
+          <ul class="list-disc pl-6 mt-2">
+            <li class="mb-2">「ソウゾウ」ページではアナタだけのイキモノを描いて生み出すことができます。アナタがソウゾウしたイキモノの一覧も表示されます。</li>
+            <li class="mb-2">ソウゾウしたイキモノは「アクアリウム」に現れるようになります。</li>
+          </ul>
+        </div>
+        <div class="flex flex-col lg:flex-row gap-6 mt-8">
+          <%= image_tag "how_img_02.png", class: "object-contain w-full max-w-sm lg:w-1/3 mx-auto" %>
+          <ul class="list-disc pl-6 mt-2">
+            <li class="mb-2">「アクアリウム」右上に「図鑑」ボタンが表示され、イキモノの総数に対してアナタが発見した数が表示されるようになります。</li>
+            <li class="mb-2">「図鑑」ページ内では、アナタが今まで見つけたイキモノの一覧を表示できます。</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </div>
