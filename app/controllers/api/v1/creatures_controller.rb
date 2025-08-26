@@ -1,17 +1,13 @@
 class Api::V1::CreaturesController < Api::V1::BaseController
-  skip_before_action :require_login, only: [ :random, :show ]
+  skip_before_action :require_login
 
+  def show; end
+  
   def random
     # movementパラメータの処理を改善
     movement_param = params[:movement] || [ "swim", "float", "rest" ].sample
     # enumの数値に変換
     movement_value = Creature.movements[movement_param]
-
-    # movement_valueがnilの場合（無効なパラメータ）の処理
-    unless movement_value
-      render json: { error: "Invalid movement parameter" }, status: 400
-      return
-    end
 
     # ユーザー名を取得させる
     base_query = Creature.joins(:user)
@@ -45,8 +41,8 @@ class Api::V1::CreaturesController < Api::V1::BaseController
         size: creature.size,
         svg_content: svg_content,
         creator_name: creature.creator_name,
-        discovered: is_discovered,
-        can_discover: current_user.present? && !is_discovered # 発見可能かどうか
+        can_discover: current_user.present? && !is_discovered,
+        twitter_share_url: twitter_share_url_for_creature(creature),
       }
     else
       render json: { error: "生き物が見つかりませんでした" }, status: 404
@@ -60,11 +56,13 @@ class Api::V1::CreaturesController < Api::V1::BaseController
     book = current_user.books.find_or_create_by(creature: creature) do |new_book|
     end
 
+    # DBに保存済みかチェック
     if book.persisted?
       # ヘッダー図鑑ボタン用のカウント情報
       discovered_count = current_user.books.count
       total_creatures_count = Creature.count
 
+      # オブジェクトが直前の保存でデータベースに新規作成されたらtrue
       if book.previously_new_record?
         # 発見成功
         render json: {
@@ -93,28 +91,6 @@ class Api::V1::CreaturesController < Api::V1::BaseController
       render json: { success: false, error: "発見処理中にエラーが発生しました" }
   end
 
-  def show
-    creature = Creature.joins(:user)
-                      .select("creatures.*, users.name as creator_name")
-                      .find(params[:id])
-
-    # SVG処理
-    svg_content = get_svg_content(creature)
-    is_discovered = current_user ? current_user.discovered?(creature) : false
-
-    render json: {
-      id: creature.id,
-      name: creature.name,
-      description: creature.description,
-      movement: creature.movement,
-      size: creature.size,
-      svg_content: svg_content,
-      creator_name: creature.creator_name,
-      discovered: is_discovered,
-      can_discover: current_user.present? && !is_discovered
-    }
-  end
-
   private
 
   def get_svg_content(creature)
@@ -123,5 +99,13 @@ class Api::V1::CreaturesController < Api::V1::BaseController
     rescue JSON::ParserError
       svg_content = creature.svg_data # 既にSVG文字列の場合
     end
+  end
+
+  def twitter_share_url_for_creature(creature)
+    share_text = "『#{creature.name}』に出会ったよ！ #DAYDREAM_AQUARIUM\n"
+    encoded_text = URI.encode_www_form_component(share_text)
+    encoded_url = URI.encode_www_form_component(creature_url(creature))
+    
+    "https://twitter.com/share?url=#{encoded_url}&text=#{encoded_text}"
   end
 end
