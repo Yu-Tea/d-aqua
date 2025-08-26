@@ -23,9 +23,9 @@
           <% if logged_in? %>
             <% menu_items = [
               { icon: "fa-solid fa-fish-fins", label_key: "header.top", path: root_path },
+              { icon: "fa-solid fa-pencil", label_key: "header.create", path: creatures_path },
               { icon: "fa-solid fa-face-smile", label_key: "header.profile", path: profile_path },
               { icon: "fa-solid fa-disease", label_key: "header.how_to_play", path: how_to_play_path },
-              { icon: "fa-solid fa-pencil", label_key: "header.create", path: creatures_path },
               { icon: "fa-solid fa-file-circle-check", label_key: "header.terms", path: terms_path },
               { icon: "fa-solid fa-shield-halved", label_key: "header.privacy", path: privacy_path },
               { 
@@ -37,9 +37,9 @@
             ] %>
           <% else %>
             <% menu_items = [
+              { icon: "fa-solid fa-fish-fins", label_key: "header.top", path: root_path },
               { icon: "fa-solid fa-user", label_key: "header.register", path: new_user_path },
               { icon: "fa-solid fa-right-to-bracket", label_key: "header.login", path: login_path },
-              { icon: "fa-solid fa-fish-fins", label_key: "header.top", path: root_path },
               { icon: "fa-solid fa-disease", label_key: "header.how_to_play", path: how_to_play_path },
               { icon: "fa-solid fa-file-circle-check", label_key: "header.terms", path: terms_path },
               { icon: "fa-solid fa-shield-halved", label_key: "header.privacy", path: privacy_path }

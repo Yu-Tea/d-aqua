@@ -1,24 +1,34 @@
-# README
+# 🐠 DAYDREAM AQUARIUM
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+DAYDREAM AQUARIUMは、アナタや誰かがソウゾウしたイキモノが住まう空想水族館です。
 
-Things you may want to cover:
+## 📖 サービス概要
 
-* Ruby version
+DAYDREAM AQUARIUMは、ユーザーがイラストを描いて生き物を作成したり、発見してコレクションできるインタラクティブなWebアプリケーションです。
+ユーザーが作成した生き物はアクアリウム画面内にランダムに発生し、クリックすることで情報を確認したり図鑑に登録することができます。
 
-* System dependencies
+## 🎯 メインのターゲットユーザー
 
-* Configuration
+- 海洋生物に興味がある方
+- コレクション要素のあるゲームが好きな方
+- イラストを描くことが好きな方
+- SNSでシェアを楽しみたい方
 
-* Database creation
+## 💡 遊び方
 
-* Database initialization
+ユーザー登録していない方でも、アクアリウム内で発生する生き物を眺めたり、クリックして詳細を確認したり「Xに投稿」ボタンで共有することができます。
 
-* How to run the test suite
+### ログインすると出来ること
+- ログインすると表示される「ソウゾウ」ページで、生き物を描いて作成できます。
+- 作成した生き物は「アクアリウム」ページに現れるようになります。
+- 「アクアリウム」ページの右上に「図鑑」ボタンが表示され、登録されている生き物の総数に対して発見した数が表示されるようになります。
+- 「図鑑」ページ内では、今までにクリックして発見した生き物が一覧で表示され、各生き物の詳細ページを確認できるようになります。
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
 
-* ...
+## 🛠 使用技術・デプロイ
+
+- Rails 7.2.2
+- Ruby 3.3.6
+- Render
+- Neon
