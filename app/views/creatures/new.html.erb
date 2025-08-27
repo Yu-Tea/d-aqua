@@ -8,14 +8,14 @@
       <%= form_with model: @creature do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
       <div class="flex flex-col lg:flex-row justify-center gap-8 mt-8 mb-2">
-        <div class="flex-shrink-0 w-full lg:w-auto" data-controller="drawing">
+        <div class="flex-shrink-0 w-full lg:w-auto" data-controller="drawing" data-drawing-max-size-value="102400">
           <div class="font-bold main-color text-center lg:text-left mb-1">お絵かき</div>
           <div class="draw-box mb-2">
             <svg data-drawing-target="canvas" width="300px" height="300px" viewBox="0 0 300 300"></svg>
           </div>
           <div class="my-3">
             線の太さ:
-            <input type="range" min="2" max="15" value="3" data-drawing-target="strokeWidth">
+            <input type="range" min="2" max="15" value="5" data-drawing-target="strokeWidth">
           </div>
       
           <%= f.hidden_field :svg_data, data: { drawing_target: "output" } %>
@@ -25,6 +25,8 @@
           <button type="button" class="white-button px-3 py-1" data-action="click->drawing#clear">
             <i class="fa-solid fa-trash-can"></i>すべて消す
           </button>
+          <!-- 容量上限の警告メッセージ -->
+          <div data-drawing-target="warningMessage" class="warning-message hidden"></div>
         </div>
         <%= render 'form', f: f %>
       </div>
