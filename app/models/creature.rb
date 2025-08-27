@@ -6,6 +6,11 @@ class Creature < ApplicationRecord
   validates :movement, presence: true
   validates :size, presence: true
 
+  # SVGデータのサイズ制限（例：100KB）
+  SVG_DATA_MAX_SIZE = 100.kilobytes
+  validates :svg_data, presence: true
+  validate :svg_data_size_limit
+
   # enumで定義（integer型）
   enum :movement, { swim: 0, float: 1, rest: 2 }
   enum :size, { small: 0, medium: 1, large: 2 }
@@ -27,7 +32,6 @@ class Creature < ApplicationRecord
     find_by(id: decode_uuid)
   end
 
-  # Railsがパラメータに使用する値を指定
   def to_param
     short_uuid
   end
@@ -48,8 +52,21 @@ class Creature < ApplicationRecord
     {}
   end
 
-  # SVGを取得するメソッド
   def svg_content
     parsed_svg_data["svg"]
   end
+
+  private
+
+  def svg_data_size_limit
+    return unless svg_data.present?
+    
+    # JSONとしてシリアライズした時のサイズをチェック
+    json_size = svg_data.to_json.bytesize
+    
+    if json_size > SVG_DATA_MAX_SIZE
+      errors.add(:svg_data, "イラストデータが大きすぎます（上限: #{SVG_DATA_MAX_SIZE / 1024}KB）")
+    end
+  end
+
 end

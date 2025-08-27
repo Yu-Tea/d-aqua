@@ -29,8 +29,19 @@
   </head>
 
   <body>
-    <%= render 'shared/header' %>
-    <%= yield %>
-    <div class="bg-light"></div>
+    <div data-controller="loading">
+      <!-- ローディング画面 -->
+      <div data-loading-target="screen" class="loading-screen hidden">
+        <div class="flex items-center justify-center">
+          <%= image_tag "logo_01.png", class: "loading-logo", data: { loading_target: "logo" } %>
+        </div>
+      </div>
+      <!-- メインコンテンツ -->
+      <div data-loading-target="content" class="main-content show">
+        <%= render 'shared/header' %>
+        <%= yield %>
+        <div class="bg-light"></div>
+      </div>
+    </div>
   </body>
 </html>

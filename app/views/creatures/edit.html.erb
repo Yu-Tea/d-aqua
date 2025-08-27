@@ -7,7 +7,7 @@
       <%= form_with model: @creature do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
       <div class="flex flex-col lg:flex-row justify-center gap-8 mt-8 mb-2">
-        <div class="flex-shrink-0 w-full lg:w-auto" data-controller="drawing">
+        <div class="flex-shrink-0 w-full lg:w-auto">
           <div class="font-bold main-color text-left mb-1">イキモノ</div>
           <div class="draw-box">
             <%= raw @creature.svg_content %>
