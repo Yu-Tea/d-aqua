@@ -59,15 +59,9 @@ class Creature < ApplicationRecord
   end
 
   # OGP作成
-  #def ogp_image_url
-    # 既にOGP画像が生成済みの場合はそのURLを返す
-   # return self[:ogp_image_url] if self[:ogp_image_url].present?
-    # 
-    # 初回のみOGP画像を生成してURLを保存
-    # generated_url = generate_ogp_image
-    # update_column(:ogp_image_url, generated_url)
-    # generated_url
-  # end
+  def get_ogp_image_url
+    self[:ogp_image_url].presence || default_ogp_image_url
+  end
 
   # OGP画像を生成して保存（明示的に呼び出し）
   def generate_and_save_ogp_image
@@ -76,8 +70,19 @@ class Creature < ApplicationRecord
     generated_url = generate_ogp_image
     update_column(:ogp_image_url, generated_url)
     generated_url
+  rescue => e
+    # エラー時はデフォルト画像を設定
+    Rails.logger.error "OGP生成エラー: #{e.message}"
+    default_url = default_ogp_image_url
+    update_column(:ogp_image_url, default_url)
+    default_url
   end
-  
+
+  def default_ogp_image_url
+    # デフォルトのOGP画像URL
+    "https://res.cloudinary.com/dk1v9site/image/upload/v1756282764/generated_ogp/ogp_default.png"
+  end
+
   private
 
   # OGP画像作成
@@ -144,10 +149,7 @@ class Creature < ApplicationRecord
     end
   end
 
-  def default_ogp_image_url
-    # デフォルトのOGP画像URL
-    "https://res.cloudinary.com/dk1v9site/image/upload/v1756282764/generated_ogp/ogp_default.png"
-  end
+  
 
   # SVGイラストをDBに保存時のサイズチェック
   def svg_data_size_limit
