@@ -78,11 +78,6 @@ class Creature < ApplicationRecord
     default_url
   end
 
-  def default_ogp_image_url
-    # デフォルトのOGP画像URL
-    "https://res.cloudinary.com/dk1v9site/image/upload/v1756282764/generated_ogp/ogp_default.png"
-  end
-
   private
 
   # OGP画像作成
@@ -149,7 +144,10 @@ class Creature < ApplicationRecord
     end
   end
 
-  
+  def default_ogp_image_url
+    # デフォルトのOGP画像URL
+    "https://res.cloudinary.com/dk1v9site/image/upload/v1756282764/generated_ogp/ogp_default.png"
+  end
 
   # SVGイラストをDBに保存時のサイズチェック
   def svg_data_size_limit

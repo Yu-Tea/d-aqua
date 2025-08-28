@@ -38,10 +38,7 @@ class CreaturesController < ApplicationController
       begin
       # OGP画像生成を試行
       @creature.generate_and_save_ogp_image
-      Rails.logger.info "OGP画像生成成功: #{@creature.name}"
     rescue => e
-      # OGP生成エラーでも投稿は成功として扱う
-      Rails.logger.error "OGP画像生成エラー: #{e.message}"
       # 必要に応じてデフォルト画像を設定
       @creature.update_column(:ogp_image_url, default_ogp_image_url)
     end
@@ -76,5 +73,9 @@ class CreaturesController < ApplicationController
 
   def creature_params
     params.require(:creature).permit(:name, :description, :movement, :size, :svg_data)
+  end
+
+  def default_ogp_image_url
+    "https://res.cloudinary.com/dk1v9site/image/upload/v1756282764/generated_ogp/ogp_default.png"
   end
 end
