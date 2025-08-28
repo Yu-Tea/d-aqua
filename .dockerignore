@@ -46,3 +46,8 @@
 # Ignore Docker-related files
 /.dockerignore
 /Dockerfile*
+
+.nyc_output
+coverage
+.nyc_output
+.vscode
