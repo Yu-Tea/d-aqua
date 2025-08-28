@@ -29,6 +29,8 @@ RUN apt-get update -qq && \
     libxml2-dev \
     libxslt1-dev \
     pkg-config \
+    imagemagick \
+    libmagickwand-dev \
     && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 
@@ -55,6 +57,8 @@ RUN apt-get update -qq && \
     libgdk-pixbuf2.0-dev \
     librsvg2-dev \
     libcairo2-dev \
+    imagemagick \
+    libmagickwand-dev \
     && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Install JavaScript dependencies
