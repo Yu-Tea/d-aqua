@@ -75,3 +75,4 @@ gem "mini_magick"
 gem "tempfile"
 
 gem "rsvg2"
+gem  "cairo"
