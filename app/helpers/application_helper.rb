@@ -12,4 +12,23 @@ module ApplicationHelper
     base_title = "DAYDREAM AQUARIUM"
     title.present? ? "#{title} | #{base_title}" : base_title
   end
+
+  def default_meta_tags
+    {
+      description: "DAYDREAM AQUARIUMはアナタや誰かがソウゾウしたイキモノが住まう空想水族館です。",
+      canonical: request.original_url,
+      og: {
+        title: :"DAYDREAM AQUARIUM",
+        type: "website",
+        url: request.original_url,
+        image: image_url("ogp.png"),
+        site_name: "DAYDREAM AQUARIUM",
+        description: :description,
+      },
+      twitter: {
+        card: "summary_large_image",
+        site: "@Yu_Tea_68",
+      }
+    }
+  end
 end

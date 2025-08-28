@@ -44,8 +44,6 @@ export default class extends Controller {
       "input",
       this.updateStrokeWidth.bind(this)
     );
-
-    console.log("🎨 Drawing controller with size monitoring connected");
   }
 
   startDrawing(event) {
@@ -103,12 +101,6 @@ export default class extends Controller {
   checkDataSizeAndWarn() {
     const currentSize = this.calculateCurrentDataSize();
     const percentage = (currentSize / this.maxSizeValue) * 100;
-
-    console.log(
-      `📊 Drawing completed. Size: ${currentSize} bytes (${percentage.toFixed(
-        1
-      )}%)`
-    );
 
     if (percentage >= 100) {
       // 100%に達したら描画をブロック
@@ -177,7 +169,6 @@ export default class extends Controller {
   blockDrawing() {
     this.isDrawingBlocked = true;
     this.canvasTarget.classList.add("drawing-disabled");
-    console.log("🚫 Drawing blocked due to size limit");
   }
 
   // 描画ブロックを解除
@@ -185,7 +176,6 @@ export default class extends Controller {
     this.isDrawingBlocked = false;
     this.canvasTarget.classList.remove("drawing-disabled");
     this.hideWarning();
-    console.log("✅ Drawing unblocked");
   }
 
   undo() {
@@ -206,12 +196,6 @@ export default class extends Controller {
     if (percentage < 100 && this.isDrawingBlocked) {
       this.unblockDrawing();
     }
-
-    console.log(
-      `📝 Undo completed. Current size: ${currentSize} bytes (${percentage.toFixed(
-        1
-      )}%)`
-    );
   }
 
   handleTouch(event) {
@@ -251,7 +235,6 @@ export default class extends Controller {
 
     // クリア後はブロック解除して警告も隠す
     this.unblockDrawing();
-    console.log("🗑️ Canvas cleared");
   }
 
   updateSvgData() {

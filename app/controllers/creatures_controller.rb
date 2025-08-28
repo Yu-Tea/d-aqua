@@ -11,6 +11,25 @@ class CreaturesController < ApplicationController
 
   def show
     @creature = Creature.find_by_short_uuid(params[:id])
+
+    # OGP画像切り替え
+    set_meta_tags(
+      title: @creature.name,
+      description: @creature.description,
+      og: {
+        title: @creature.name,
+        description: @creature.description,
+        image: @creature.ogp_image_url,
+        url: creature_url(@creature),
+        type: 'article'
+      },
+      twitter: {
+        card: 'summary',
+        title: @creature.name,
+        description: @creature.description,
+        image: @creature.ogp_image_url
+      }
+    )
   end
 
   def create
