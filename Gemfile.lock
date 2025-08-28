@@ -464,6 +464,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   brakeman
+  cairo
   capybara
   cloudinary (~> 1.25)
   config
