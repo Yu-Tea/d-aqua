@@ -12,7 +12,7 @@ class CreaturesController < ApplicationController
   def show
     @creature = Creature.find_by_short_uuid(params[:id])
 
-    # OGP画像切り替え
+    # OGP画像の切り替え
     set_meta_tags(
       title: @creature.name,
       description: @creature.description,
@@ -35,8 +35,16 @@ class CreaturesController < ApplicationController
   def create
     @creature = current_user.creatures.build(creature_params)
     if @creature.save
-      # 保存成功後にOGP画像を生成
+      begin
+      # OGP画像生成を試行
       @creature.generate_and_save_ogp_image
+      Rails.logger.info "OGP画像生成成功: #{@creature.name}"
+    rescue => e
+      # OGP生成エラーでも投稿は成功として扱う
+      Rails.logger.error "OGP画像生成エラー: #{e.message}"
+      # 必要に応じてデフォルト画像を設定
+      @creature.update_column(:ogp_image_url, default_ogp_image_url)
+    end
       redirect_to creatures_path, success: t("defaults.flash_message.created", item: Creature.model_name.human)
     else
       flash.now[:danger] = t("defaults.flash_message.not_created", item: Creature.model_name.human)
