@@ -35,6 +35,8 @@ class CreaturesController < ApplicationController
   def create
     @creature = current_user.creatures.build(creature_params)
     if @creature.save
+      # 保存成功後にOGP画像を生成
+      @creature.generate_and_save_ogp_image
       redirect_to creatures_path, success: t("defaults.flash_message.created", item: Creature.model_name.human)
     else
       flash.now[:danger] = t("defaults.flash_message.not_created", item: Creature.model_name.human)
