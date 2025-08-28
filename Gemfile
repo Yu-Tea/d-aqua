@@ -68,7 +68,7 @@ gem "enum_help"
 gem "kaminari"
 
 gem "config"
-gem "cloudinary", "~> 1.25"
+gem "cloudinary", "~> 2.3"
 gem "meta-tags"
 
 gem "mini_magick"
