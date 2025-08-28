@@ -15,6 +15,12 @@ WORKDIR /rails
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y curl libjemalloc2 libvips postgresql-client && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
+    # rsvg2用
+    librsvg2-2 \
+    libglib2.0-0 \
+    libgdk-pixbuf2.0-0 \
+    libcairo2 \
+    && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Set production environment
 ENV RAILS_ENV="production" \
@@ -29,6 +35,13 @@ FROM base AS build
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential git libpq-dev node-gyp pkg-config python-is-python3 && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
+    # rsvg2用
+    libgirepository1.0-dev \
+    libglib2.0-dev \
+    libgdk-pixbuf2.0-dev \
+    librsvg2-dev \
+    libcairo2-dev \
+    && rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Install JavaScript dependencies
 ARG NODE_VERSION=20.19.4
