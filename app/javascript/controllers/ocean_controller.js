@@ -227,7 +227,7 @@ export default class extends Controller {
 
       const data = await response.json();
 
-      // 🔥 発見時のTwitterボタン設定
+      // 発見時のTwitterボタン設定
       if (data.creature_data && data.creature_data.twitter_share_url) {
         this.setupTwitterButton(data.creature_data.twitter_share_url);
       }

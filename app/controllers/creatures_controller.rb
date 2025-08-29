@@ -14,8 +14,6 @@ class CreaturesController < ApplicationController
 
     # OGP画像の切り替え
     set_meta_tags(
-      title: @creature.name,
-      description: @creature.description,
       og: {
         title: @creature.name,
         description: @creature.description,
