@@ -1,4 +1,4 @@
-require 'tempfile'
+require "tempfile"
 
 class Creature < ApplicationRecord
   belongs_to :user
@@ -8,12 +8,11 @@ class Creature < ApplicationRecord
   validates :movement, presence: true
   validates :size, presence: true
 
-  # SVGデータのサイズ制限（例：100KB）
+  # SVGデータのサイズ制限
   SVG_DATA_MAX_SIZE = 100.kilobytes
   validates :svg_data, presence: true
   validate :svg_data_size_limit
 
-  # enumで定義（integer型）
   enum :movement, { swim: 0, float: 1, rest: 2 }
   enum :size, { small: 0, medium: 1, large: 2 }
 
@@ -38,16 +37,16 @@ class Creature < ApplicationRecord
     short_uuid
   end
 
-  # SVGデータを取得するメソッド
+  # SVGデータを取得する
   def parsed_svg_data
     return {} unless svg_data.present?
 
     case svg_data
-      when String
+    when String
         JSON.parse(svg_data)
-      when Hash
+    when Hash
         svg_data
-      else
+    else
         {}
     end
   rescue JSON::ParserError
@@ -66,7 +65,7 @@ class Creature < ApplicationRecord
   # OGP画像を生成して保存（明示的に呼び出し）
   def generate_and_save_ogp_image
     return if self[:ogp_image_url].present? # 既に生成済みなら何もしない
-    
+
     generated_url = generate_ogp_image
     update_column(:ogp_image_url, generated_url)
     generated_url
@@ -87,44 +86,44 @@ class Creature < ApplicationRecord
     svg_content = self.svg_content
     svg_handle = RSVG::Handle.new_from_data(svg_content)
     original_dimensions = svg_handle.dimensions
-    
+
     # 390pxに拡大する比率を計算
     svg_size = 390
     scale_x = svg_size.to_f / original_dimensions.width
     scale_y = svg_size.to_f / original_dimensions.height
-    
+
     # 390x390pxでCairo Surfaceを作成
     surface = Cairo::ImageSurface.new(Cairo::FORMAT_ARGB32, svg_size, svg_size)
     context = Cairo::Context.new(surface)
-    
+
     # 透明背景設定
     context.set_operator(Cairo::OPERATOR_CLEAR)
     context.paint
     context.set_operator(Cairo::OPERATOR_OVER)
-    
+
     # 390pxサイズでSVG描画
     context.scale(scale_x, scale_y)
     svg_handle.render_cairo(context)
-    
+
     # 一時ファイルでクリーチャー画像を作成
-    Tempfile.create(['creature_390px', '.png']) do |creature_temp|
+    Tempfile.create([ "creature_390px", ".png" ]) do |creature_temp|
       surface.write_to_png(creature_temp.path)
-      
+
       # 背景画像と合成
       background_url = "https://res.cloudinary.com/dk1v9site/image/upload/v1756279471/ogp_templates/creature_ogp_background.png"
       background_image = MiniMagick::Image.open(background_url)
       creature_image = MiniMagick::Image.open(creature_temp.path)
-      
+
       result = background_image.composite(creature_image) do |c|
         c.compose "Over"
         c.gravity "center"
       end
       result.flatten
-      
+
       # 最終結果を一時ファイルで作成
-      Tempfile.create(['ogp_final', '.png']) do |final_temp|
+      Tempfile.create([ "ogp_final", ".png" ]) do |final_temp|
         result.write(final_temp.path)
-        
+
         # Cloudinaryにアップロード
         upload_result = Cloudinary::Uploader.upload(
           final_temp.path,
@@ -132,15 +131,15 @@ class Creature < ApplicationRecord
           overwrite: true,
           resource_type: "image"
         )
-        
-        return upload_result['secure_url']
+
+        return upload_result["secure_url"]
       end
     end
-    
+
     rescue => e
       Rails.logger.error "OGP画像生成エラー: #{e.message}"
       Rails.logger.error e.backtrace.join("\n")
-      return nil
+      nil
     end
   end
 
@@ -152,10 +151,10 @@ class Creature < ApplicationRecord
   # SVGイラストをDBに保存時のサイズチェック
   def svg_data_size_limit
     return unless svg_data.present?
-    
+
     # JSONとしてシリアライズした時のサイズをチェック
     json_size = svg_data.to_json.bytesize
-    
+
     if json_size > SVG_DATA_MAX_SIZE
       errors.add(:svg_data, "イラストデータが大きすぎます（上限: #{SVG_DATA_MAX_SIZE / 1024}KB）")
     end

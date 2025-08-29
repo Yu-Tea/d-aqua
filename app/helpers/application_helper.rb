@@ -23,11 +23,11 @@ module ApplicationHelper
         url: request.original_url,
         image: image_url("ogp.png"),
         site_name: "DAYDREAM AQUARIUM",
-        description: :description,
+        description: :description
       },
       twitter: {
         card: "summary_large_image",
-        site: "@Yu_Tea_68",
+        site: "@Yu_Tea_68"
       }
     }
   end

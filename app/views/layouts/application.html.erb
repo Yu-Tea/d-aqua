@@ -6,9 +6,10 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= display_meta_tags(default_meta_tags) %>
-
+    <%= preload_link_tag asset_path('bg_floor.png'), as: :image %>
+    <%= preload_link_tag asset_path('bg_light.png'), as: :image %>
+    <%= preload_link_tag asset_path('bg_sea.png'), as: :image %>
     <%= yield :head %>
-
     <!-- <link rel="manifest" href="/manifest.json"> -->
     <%= favicon_link_tag('favicon.ico') %>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" type="text/css" />

@@ -47,7 +47,6 @@ export default class extends Controller {
       const creature = await response.json();
       if (!creature.error) {
         this.renderCreature(creature);
-        this.setupTwitterButton(creature.twitter_share_url);
       }
     } catch (error) {
       console.error("イキモノの生成でエラー:", error);

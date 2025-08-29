@@ -19,10 +19,10 @@ class CreaturesController < ApplicationController
         description: @creature.description,
         image: @creature.ogp_image_url,
         url: creature_url(@creature),
-        type: 'article'
+        type: "article"
       },
       twitter: {
-        card: 'summary',
+        card: "summary",
         title: @creature.name,
         description: @creature.description,
         image: @creature.ogp_image_url
