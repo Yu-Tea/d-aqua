@@ -2,7 +2,7 @@ class Api::V1::CreaturesController < Api::V1::BaseController
   skip_before_action :require_login
 
   def show; end
-  
+
   def random
     # movementパラメータの処理を改善
     movement_param = params[:movement] || [ "swim", "float", "rest" ].sample
@@ -42,7 +42,7 @@ class Api::V1::CreaturesController < Api::V1::BaseController
         svg_content: svg_content,
         creator_name: creature.creator_name,
         can_discover: current_user.present? && !is_discovered,
-        twitter_share_url: twitter_share_url_for_creature(creature),
+        twitter_share_url: twitter_share_url_for_creature(creature)
       }
     else
       render json: { error: "生き物が見つかりませんでした" }, status: 404
@@ -105,7 +105,7 @@ class Api::V1::CreaturesController < Api::V1::BaseController
     share_text = "『#{creature.name}』を発見したよ！ #DAYDREAM_AQUARIUM\n"
     encoded_text = URI.encode_www_form_component(share_text)
     encoded_url = URI.encode_www_form_component(creature_url(creature))
-    
+
     "https://twitter.com/share?url=#{encoded_url}&text=#{encoded_text}"
   end
 end
