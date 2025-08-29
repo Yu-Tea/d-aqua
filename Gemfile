@@ -69,6 +69,7 @@ gem "kaminari"
 
 gem "config"
 gem "cloudinary", "~> 1.25"
+gem "carrierwave"
 gem "meta-tags"
 
 gem "mini_magick"
