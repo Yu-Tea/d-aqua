@@ -4,7 +4,7 @@
       <div class="bg-white p-4 sm:px-10 sm:py-8 rounded-xl mb-6 max-w-md mx-5 sm:mx-auto">
         <h2 class="text-2xl sm:text-4xl mb-1 "><%= @creature.name %></h2>
         <p>制作者：<%= @creature.user.name %></p>
-        <% if current_user.own?(@creature) %>
+        <% if logged_in? && current_user.own?(@creature) %>
           <div class="flex items-center justify-end gap-1">
             <%= link_to edit_creature_path(@creature), id: "button-edit-#{@creature.id}" do %>
               <i class="fa-solid fa-pencil"></i>

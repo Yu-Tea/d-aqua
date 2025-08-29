@@ -102,7 +102,7 @@ class Api::V1::CreaturesController < Api::V1::BaseController
   end
 
   def twitter_share_url_for_creature(creature)
-    share_text = "『#{creature.name}』に出会ったよ！ #DAYDREAM_AQUARIUM\n"
+    share_text = "『#{creature.name}』を発見したよ！ #DAYDREAM_AQUARIUM\n"
     encoded_text = URI.encode_www_form_component(share_text)
     encoded_url = URI.encode_www_form_component(creature_url(creature))
     

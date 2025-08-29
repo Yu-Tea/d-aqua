@@ -11,6 +11,6 @@ module CreaturesHelper
 
   def twitter_share_text(creature)
     action = current_user == creature.user ? 'ソウゾウ' : '発見'
-    "『#{creature.name}』を#{action}したよ！ #DAYDREAM_AQUARIUM"
+    "『#{creature.name}』を#{action}したよ！ #DAYDREAM_AQUARIUM\n"
   end
 end

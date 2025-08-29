@@ -15,10 +15,10 @@ module ApplicationHelper
 
   def default_meta_tags
     {
-      description: "DAYDREAM AQUARIUMはアナタや誰かがソウゾウしたイキモノが住まう空想水族館です。",
+      description: "当館はアナタや誰かがソウゾウしたイキモノが住まう空想水族館です。",
       canonical: request.original_url,
       og: {
-        title: :"DAYDREAM AQUARIUM",
+        title: :title,
         type: "website",
         url: request.original_url,
         image: image_url("ogp.png"),
