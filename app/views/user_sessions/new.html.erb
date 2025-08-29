@@ -13,13 +13,16 @@
             <%= f.label :password, class: "block font-bold main-color mb-1" %>
             <%= f.password_field :password, class: "appearance-none border rounded-md w-full py-2 px-4 text-gray-700 leading-tight focus:border-blue-400 focus:outline-none" %>
           </div>
-          <button type="submit" class="aqua-button my-3"><i class="fa-solid fa-right-to-bracket mr-1"></i>ログイン</button>
+          <button type="submit" class="aqua-button my-4"><i class="fa-solid fa-right-to-bracket mr-1"></i>ログイン</button>
         <% end %>
-        <div class='text-center'>
-          <%= link_to t('.to_register_page'), new_user_path %>
-          <span class="main-color">|</span>
-          <%= link_to t('.password_forget'), new_password_reset_path %>
+        <div class="mb-1">
+          <%= link_to new_user_path do %>
+            <i class="fa-solid fa-user mr-1"></i><span class="font-bold">ユーザー登録ページ</span>
+          <% end %>
         </div>
+        <%= link_to new_password_reset_path, class: "mt-5" do %>
+          <i class="fa-solid fa-circle-question"></i><span class="font-bold">パスワードをお忘れの方はこちら</span>
+        <% end %>
       </div>
     </div>
   </div>
