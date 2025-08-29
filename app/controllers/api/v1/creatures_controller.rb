@@ -19,13 +19,13 @@ class Api::V1::CreaturesController < Api::V1::BaseController
     if current_user
       discovered_ids = current_user.books.pluck(:creature_id)
       if discovered_ids.any? && rand < 0.6
-        undiscovered = base_query.where.not(id: discovered_ids)
-        creature = undiscovered.sample if undiscovered.exists?
+        # 未発見を優先（SQLでランダム1件のみ抽出）
+      creature = base_query.where.not(id: discovered_ids).order("RANDOM()").first
       end
     end
 
-    # 未発見がない場合や非ログイン時は普通にランダム
-    creature ||= base_query.sample
+    # 未発見がない場合や非ログイン時は普通にランダム（SQLでランダム1件のみ抽出）
+    creature ||= base_query.order("RANDOM()").first
 
     if creature
       # SVG処理
