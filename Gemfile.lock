@@ -354,7 +354,7 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
-    rexml (3.4.1)
+    rexml (3.4.4)
     rsvg2 (4.3.3)
       cairo-gobject (= 4.3.3)
       gdk_pixbuf2 (= 4.3.3)
@@ -391,7 +391,7 @@ GEM
     ruby-vips (2.2.5)
       ffi (~> 1.12)
       logger
-    rubyzip (3.0.2)
+    rubyzip (3.1.1)
     sassc (2.4.0)
       ffi (~> 1.9)
     sassc-rails (2.1.2)
@@ -401,9 +401,11 @@ GEM
       sprockets-rails
       tilt
     securerandom (0.4.1)
-    selenium-webdriver (4.35.0)
+    selenium-webdriver (4.36.0)
       base64 (~> 0.2)
+      json (<= 2.13.2)
       logger (~> 1.4)
+      prism (~> 1.0, < 1.5)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 4.0)
       websocket (~> 1.0)
