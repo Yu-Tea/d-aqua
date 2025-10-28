@@ -59,7 +59,7 @@ group :test do
 end
 
 gem "tailwindcss-rails"
-gem "tailwindcss-ruby", "3.4.17"
+gem "tailwindcss-ruby", "4.1.16"
 
 gem "sassc-rails"
 gem "sorcery"
