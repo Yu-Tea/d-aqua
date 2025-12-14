@@ -28,10 +28,10 @@ DAYDREAM AQUARIUM は、ユーザーがイラストを描いて生き物を作�
   </tr>
   <tr>
     <td>
-      <img src="https://i.gyazo.com/9bd9c40a48e0e8c6db35121be53ea3b7.gif">
+      <img src="https://github.com/user-attachments/assets/425b8d7e-8d4d-4627-a38a-f5c7ab622f56">
     </td>
     <td>
-      <img src="https://i.gyazo.com/76ea997ec10f3d28f2a91d0dc33c8a47.gif">
+      <img src="https://github.com/user-attachments/assets/ac06cba4-d1eb-48f9-bf58-b5cfe32941ff">
     </td>
   </tr>
   <tr>
@@ -54,10 +54,10 @@ DAYDREAM AQUARIUM は、ユーザーがイラストを描いて生き物を作�
   </tr>
   <tr>
     <td>
-      <img src="https://i.gyazo.com/8f8574526e1c3727057103284608548a.gif">
+      <img src="https://github.com/user-attachments/assets/40251058-1e07-4a39-87e9-87f5eef0cb69">
     </td>
     <td>
-      <img src="https://i.gyazo.com/8aca8405f485d86416bc0e13e50fc7d6.gif">
+      <img src="https://github.com/user-attachments/assets/f9108e90-8cf3-4a30-8e5a-600236122dc8">
     </td>
   </tr>
   <tr>
