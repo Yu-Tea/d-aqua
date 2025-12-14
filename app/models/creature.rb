@@ -8,11 +8,6 @@ class Creature < ApplicationRecord
   validates :movement, presence: true
   validates :size, presence: true
 
-  # SVGデータのサイズ制限、一旦なしで
-  # SVG_DATA_MAX_SIZE = 100.kilobytes
-  # validates :svg_data, presence: true
-  # validate :svg_data_size_limit
-
   enum :movement, { swim: 0, float: 1, rest: 2 }
   enum :size, { small: 0, medium: 1, large: 2 }
 
