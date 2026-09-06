@@ -3,7 +3,9 @@
 ![](https://github.com/user-attachments/assets/27bd8b57-72b9-4504-9c3a-117bc7039090)
 DAYDREAM AQUARIUM は、アナタや誰かがソウゾウしたイキモノが住まう空想水族館です。
 
-### 🌊[ご来館はこちらから](https://day-aqua.onrender.com)
+> **【お知らせ】**
+> 
+> 本アプリの公開およびサービス運用は終了いたしました。これまでご利用・ご閲覧いただき、誠にありがとうございました！
 
 ## 📖 サービス概要
 
